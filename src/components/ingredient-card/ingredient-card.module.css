@@ -1,0 +1,21 @@
+.burger-ingredient {
+  border-radius: 20px;
+  position: relative;
+}
+
+.burger-ingredient-image-wrapper {
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.burger-ingredient-price-wrapper {
+  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2,min-content);
+  grid-gap: 9px;
+}
+
+.burger-ingredient-title {
+  text-align: center;
+}

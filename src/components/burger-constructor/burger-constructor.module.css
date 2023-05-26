@@ -1,0 +1,29 @@
+.burger-constructor {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) max-content;
+  max-height: calc(100vh - 88px);
+}
+
+.burger-constructor-list {
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+  max-height: 100%;
+}
+
+.burger-constructor-total-wrapper {
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  
+  justify-content: flex-end;
+}
+
+.burger-constructor-total-amount {
+  display: grid;
+  grid-gap: 9px;
+  grid-template-columns: repeat(2, min-content);
+}
+
+.burger-constructor-space {
+  overflow-y: overlay;
+}
