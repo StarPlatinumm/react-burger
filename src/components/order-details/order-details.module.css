@@ -1,0 +1,26 @@
+.placed-order-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.placed-order-details-id {
+  text-shadow: 0 0 50px var(--colors-interface-accent);
+}
+
+.placed-order-details-id-title {
+  text-transform: lowercase;
+}
+
+.placed-order-details-status-icon {
+  height: 120px;
+  width: 120px;
+  align-items: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+}
+
+
+

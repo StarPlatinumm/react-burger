@@ -16,13 +16,13 @@
 }
 
 .burger-ingredient-type-ingredient-list {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    grid-gap: 36px 24px;
-    list-style: none;
-    margin: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-gap: 36px 24px;
+  list-style: none;
+  margin: 0;
 }
 
 .burger-ingredient-type-ingredient-details {
-    width: 520px;
+  width: 520px;
 }
