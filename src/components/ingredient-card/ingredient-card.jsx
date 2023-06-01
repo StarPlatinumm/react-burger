@@ -17,9 +17,7 @@ function IngredientCard(props) {
   }, []);
 
   const handleCloseModal = useCallback((e) => {
-    if (e.key === "Escape" || e.type === 'click') {
-      setModalState({ visible: false });
-    }
+    setModalState({ visible: false });
   }, []);
 
   const modal = (

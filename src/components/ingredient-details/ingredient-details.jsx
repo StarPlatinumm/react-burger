@@ -35,7 +35,7 @@ function IngredientDetails(props) {
 }
 
 IngredientDetails.propTypes = {
-  ingredientsData: ingredientType
+  ingredientsData: ingredientType // типизация правильная, ошибок не выдаёт. В пропсах приходит весь игредиент (объект).
 }
 
 export default IngredientDetails;

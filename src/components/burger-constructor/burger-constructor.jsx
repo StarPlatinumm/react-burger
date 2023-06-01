@@ -3,8 +3,8 @@ import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-co
 import burgerConstructorStyles from './burger-constructor.module.css';
 import DragConstructorElement from '../constructor-element/drug-constructor-element';
 import Modal from '../modal/modal';
-import ModalOverlay from '../modal-overlay/modal-overlay';
 import OrderDetails from '../order-details/order-details';
+import { TEST_DATA } from '../../utils/data';
 
 function BurgerConstructor() {
   const [modalState, setModalState] = useState({ 
@@ -16,57 +16,57 @@ function BurgerConstructor() {
   }, []);
 
   const handleCloseModal = useCallback((e) => {
-    if (e.key === "Escape" || e.type === 'click') {
-      setModalState({ visible: false });
-    }
+    setModalState({ visible: false });
   }, []);
 
   const modal = (
-    <>
-      <Modal header="" onClose={handleCloseModal}> 
-        <OrderDetails id='034536' />
-      </Modal>
-      <ModalOverlay onClick={handleCloseModal}/>
-    </>
+    <Modal header="" onClose={handleCloseModal}> 
+      <OrderDetails id='034536' />
+    </Modal>
   );
   return (
     <>
       <div className={`${burgerConstructorStyles['burger-constructor']} pb-5 pt-25`}> {/* wrapper */}
         <div className={`${burgerConstructorStyles['burger-constructor-list']}`}>  {/* constructor */}
           <div>
-            <DragConstructorElement
-              type="top"
-              isLocked={true}
-              text="Краторная булка N-200i (верх)"
-              price={200}
-              thumbnail="https://code.s3.yandex.net/react/code/bun-02.png"
-            />
+            {
+              TEST_DATA.filter(ingredient => ingredient.name === "Краторная булка N-200i").map((ingredient) => (
+                <DragConstructorElement
+                  key={ingredient._id}
+                  type="top"
+                  isLocked={true}
+                  text={ingredient.name}
+                  price={ingredient.price}
+                  thumbnail={ingredient.image}
+                />
+              ))
+            }
           </div>
           <div className={`${burgerConstructorStyles['burger-constructor-space']} custom-scroll`}>
-            <DragConstructorElement
-              text="Говяжий метеорит (отбивная)"
-              price={50}
-              thumbnail="https://code.s3.yandex.net/react/code/meat-04.png"
-            />
-            <DragConstructorElement
-              text="Говяжий метеорит (отбивная)"
-              price={50}
-              thumbnail="https://code.s3.yandex.net/react/code/meat-04.png"
-            />
-            <DragConstructorElement
-              text="Говяжий метеорит (отбивная)"
-              price={50}
-              thumbnail="https://code.s3.yandex.net/react/code/meat-04.png"
-            />
+            {
+              TEST_DATA.filter(ingredient => ingredient.name === "Говяжий метеорит (отбивная)").map((ingredient) => (
+                <DragConstructorElement
+                  key={ingredient._id}
+                  text={ingredient.name}
+                  price={ingredient.price}
+                  thumbnail={ingredient.image}
+                />
+              ))
+            }
           </div>
           <div>
-            <DragConstructorElement
-              type="bottom"
-              isLocked={true}
-              text="Краторная булка N-200i (низ)"
-              price={200}
-              thumbnail="https://code.s3.yandex.net/react/code/bun-02.png"
-            />
+            {
+              TEST_DATA.filter(ingredient => ingredient.name === "Флюоресцентная булка R2-D3").map((ingredient) => (
+                <DragConstructorElement
+                  key={ingredient._id}
+                  type="bottom"
+                  isLocked={true}
+                  text={ingredient.name}
+                  price={ingredient.price}
+                  thumbnail={ingredient.image}
+                />
+              ))
+            }
           </div>
         </div>
         <div className={`${burgerConstructorStyles['burger-constructor-total-wrapper']} pt-10`}> {/* total */}

@@ -19,6 +19,7 @@ function App() {
         setApiData({...apiData, isLoading: true});
         const res = await fetch(ingredientsApiUrl);
         const data = await res.json();
+        if (!res.ok) throw new Error('Полученные данные невалидны');
         setApiData({...apiData, isLoading: false, data: data.data});
       } catch (err) {
         setApiData({...apiData, isLoading: false, hasError: true});
