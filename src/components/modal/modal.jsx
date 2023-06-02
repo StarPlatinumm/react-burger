@@ -10,13 +10,13 @@ const modalRoot = document.getElementById("react-modals");
 function Modal(props) {
   const { children, header, onClose } = props;
 
-  const handleCloseOnEsc = (e) => {
-    if (e.key === "Escape" || e.type === 'click') {
-      onClose();
-    }
-  }
-
   useEffect(() => {
+    const handleCloseOnEsc = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    }
+
     document.addEventListener("keydown", handleCloseOnEsc, false);
 
     return () => {

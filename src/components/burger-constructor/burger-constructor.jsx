@@ -32,10 +32,10 @@ function BurgerConstructor() {
             {
               TEST_DATA.filter(ingredient => ingredient.name === "Краторная булка N-200i").map((ingredient) => (
                 <DragConstructorElement
-                  key={ingredient._id}
+                  key="top"
                   type="top"
                   isLocked={true}
-                  text={ingredient.name}
+                  text={`${ingredient.name} (верх)`}
                   price={ingredient.price}
                   thumbnail={ingredient.image}
                 />
@@ -56,12 +56,12 @@ function BurgerConstructor() {
           </div>
           <div>
             {
-              TEST_DATA.filter(ingredient => ingredient.name === "Флюоресцентная булка R2-D3").map((ingredient) => (
+              TEST_DATA.filter(ingredient => ingredient.name === "Краторная булка N-200i").map((ingredient) => (
                 <DragConstructorElement
-                  key={ingredient._id}
+                  key="bottom"
                   type="bottom"
                   isLocked={true}
-                  text={ingredient.name}
+                  text={`${ingredient.name} (низ)`}
                   price={ingredient.price}
                   thumbnail={ingredient.image}
                 />

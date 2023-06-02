@@ -19,7 +19,7 @@ function BurgerIngredients(props) {
           <ul className={`${burgerIngredientsStyles['burger-ingredient-type-ingredient-list']} pt-6 pr-4 pl-4`}>{
             props.ingredientsData.filter(ingredient => ingredient.type === 'bun').map( (ingredient) => (
               <li key={ingredient._id}>
-                <IngredientCard {...ingredient} />
+                <IngredientCard ingredient={ingredient} />
               </li>
             ))
           }</ul>
@@ -29,7 +29,7 @@ function BurgerIngredients(props) {
           <ul className={`${burgerIngredientsStyles['burger-ingredient-type-ingredient-list']} pt-6 pr-4 pl-4`}>{
             props.ingredientsData.filter(ingredient => ingredient.type === 'sauce').map( (ingredient) => (
               <li key={ingredient._id}>
-                <IngredientCard {...ingredient} />
+                <IngredientCard ingredient={ingredient} />
               </li>
             ))
           }</ul>
@@ -39,7 +39,7 @@ function BurgerIngredients(props) {
           <ul className={`${burgerIngredientsStyles['burger-ingredient-type-ingredient-list']} pt-6 pr-4 pl-4`}>{
             props.ingredientsData.filter(ingredient => ingredient.type === 'main').map( (ingredient) => (
               <li key={ingredient._id}>
-                <IngredientCard {...ingredient} />
+                <IngredientCard ingredient={ingredient} />
               </li>
             ))
           }</ul>
@@ -50,7 +50,7 @@ function BurgerIngredients(props) {
 }
 
 BurgerIngredients.propTypes = {
-  ingredientsData: PropTypes.arrayOf(ingredientType)
+  ingredientsData: PropTypes.arrayOf(ingredientType).isRequired
 }; 
 
 export default BurgerIngredients;

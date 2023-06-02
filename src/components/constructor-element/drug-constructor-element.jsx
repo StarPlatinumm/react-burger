@@ -1,4 +1,3 @@
-import React from 'react';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import drugElementStyles from './drug-constructor-element.module.css';
 import PropTypes from 'prop-types';
