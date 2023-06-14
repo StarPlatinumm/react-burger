@@ -1,0 +1,20 @@
+.menu-list {
+  display: grid;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  grid-template-columns: max-content max-content 1fr max-content;
+}
+
+.menu-item {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  cursor: pointer;
+}
+
+.logo {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}

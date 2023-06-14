@@ -1,0 +1,28 @@
+.burger-ingredients {
+  display: grid;
+  grid-template-rows: min-content min-content minmax(0, 1fr);
+  max-height: calc(100vh - 88px);
+}
+
+.burger-ingredients-filter {
+  display: flex;
+}
+
+.burger-ingredients-type-list {
+  list-style: none;
+  margin: 0;
+  overflow-y: auto;
+  padding: 0;
+}
+
+.burger-ingredient-type-ingredient-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-gap: 36px 24px;
+  list-style: none;
+  margin: 0;
+}
+
+.burger-ingredient-type-ingredient-details {
+  width: 520px;
+}
