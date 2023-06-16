@@ -11,8 +11,9 @@ function IngredientCard(props) {
     type: "ingredient",
     item: props.ingredient
   });
+  const getStateBurgerConstructor = (state) => state.burgerConstructor;
 
-  const { bun, ingredients } = useSelector(state => state.burgerConstructor);
+  const { bun, ingredients } = useSelector(getStateBurgerConstructor);
 
   const countIngredients = useCallback(() => {
     if (props.ingredient.type === 'bun') {

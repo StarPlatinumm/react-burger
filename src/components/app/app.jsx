@@ -11,7 +11,9 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
   const dispatch = useDispatch();
-  const { isLoading, failed, ingredients } = useSelector(state => state.ingredients);
+  const getStateIngredients = (state) => state.ingredients;
+  
+  const { isLoading, failed, ingredients } = useSelector(getStateIngredients);
 
   useEffect(
     () => {

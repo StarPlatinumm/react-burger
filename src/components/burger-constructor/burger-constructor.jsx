@@ -11,8 +11,11 @@ import { ADD_INGREDIENT, MOVE_INGREDIENT } from '../../services/actions/burger-c
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
-  const { orderId } = useSelector(state => state.orderDetails);
-  const { bun, ingredients } = useSelector(state => state.burgerConstructor);
+  const getStateOrderDetails = (state) => state.orderDetails;
+  const getStateBurgerConstructor = (state) => state.burgerConstructor;
+  
+  const { orderId } = useSelector(getStateOrderDetails);
+  const { bun, ingredients } = useSelector(getStateBurgerConstructor);
 
   const handleOpenModal = useCallback(() => {
     dispatch({

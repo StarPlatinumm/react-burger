@@ -11,7 +11,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function BurgerIngredients(props) {
   const dispatch = useDispatch();
-  const { modalIngredient } = useSelector(state => state.ingredientDetails);
+  const getStateIngredientDetails = (state) => state.ingredientDetails;
+
+  const { modalIngredient } = useSelector(getStateIngredientDetails);
 
   const handleOpenModal = useCallback((ingredient) => {
     dispatch({
