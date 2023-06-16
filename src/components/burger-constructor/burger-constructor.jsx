@@ -4,7 +4,7 @@ import burgerConstructorStyles from './burger-constructor.module.css';
 import DragConstructorElement from '../constructor-element/drug-constructor-element';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
-import { ORDER_DETAILS_SHOW, ORDER_DETAILS_HIDE } from '../../services/actions/order-details';
+import { getOrderDetails, ORDER_DETAILS_CLOSE } from '../../services/actions/order-details';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from "react-dnd";
 import { ADD_INGREDIENT, MOVE_INGREDIENT } from '../../services/actions/burger-constructor';
@@ -14,21 +14,18 @@ function BurgerConstructor() {
   const getStateOrderDetails = (state) => state.orderDetails;
   const getStateBurgerConstructor = (state) => state.burgerConstructor;
   
-  const { orderId } = useSelector(getStateOrderDetails);
+  const { orderDetails, failed } = useSelector(getStateOrderDetails);
   const { bun, ingredients } = useSelector(getStateBurgerConstructor);
 
-  const handleOpenModal = useCallback(() => {
-    dispatch({
-      type: ORDER_DETAILS_SHOW,
-      orderId: '0123456'
-    });
-  }, []);
+  const handleOpenModal = () => {
+    dispatch(getOrderDetails([bun?._id, bun?._id, ...ingredients.map((item) => item._id)]));
+  };
 
-  const handleCloseModal = useCallback(() => {
+  const handleCloseModal = () => {
     dispatch({
-      type: ORDER_DETAILS_HIDE
+      type: ORDER_DETAILS_CLOSE
     });
-  }, []);
+  };
 
   const reduceTotal = useCallback(() => {
     return (bun?.price ? bun.price : 0) * 2 +
@@ -118,9 +115,9 @@ function BurgerConstructor() {
         </div>
       </div>
       {
-        orderId && 
+        (orderDetails || failed) && 
         <Modal header="" onClose={handleCloseModal}> 
-          <OrderDetails id={orderId} />
+          <OrderDetails orderDetails={orderDetails} failed={failed} />
         </Modal>}
     </>
   );
