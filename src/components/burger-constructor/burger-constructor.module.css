@@ -4,6 +4,13 @@
   max-height: calc(100vh - 88px);
 }
 
+.burger-constructor-is-empty {
+  display: flex;
+  border: 1px dashed;
+  align-items: center;
+  justify-content: center;
+}
+
 .burger-constructor-list {
   display: grid;
   grid-template-rows: max-content 1fr max-content;
@@ -14,7 +21,6 @@
   align-items: center;
   display: grid;
   grid-template-columns: repeat(3, max-content);
-  
   justify-content: flex-end;
 }
 
