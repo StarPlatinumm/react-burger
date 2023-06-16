@@ -7,7 +7,7 @@ import OrderDetails from '../order-details/order-details';
 import { ORDER_DETAILS_SHOW, ORDER_DETAILS_HIDE } from '../../services/actions/order-details';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from "react-dnd";
-import { ADD_INGREDIENT } from '../../services/actions/burger-constructor';
+import { ADD_INGREDIENT, MOVE_INGREDIENT } from '../../services/actions/burger-constructor';
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -37,12 +37,21 @@ function BurgerConstructor() {
   const [, dropTarget] = useDrop({
     accept: "ingredient",
     drop(ingredient) {
+      ingredient.name &&
       dispatch({
         type: ADD_INGREDIENT,
         ingredient: {...ingredient, key: crypto.randomUUID()}
       });
     },
   });
+
+  const moveElement = useCallback((dragIndex, hoverIndex) => {
+    dispatch({
+      type: MOVE_INGREDIENT,
+      dragIndex: dragIndex,
+      hoverIndex: hoverIndex
+    });
+  }, [])
 
   return (
     <>
@@ -70,13 +79,15 @@ function BurgerConstructor() {
           <div className={`${burgerConstructorStyles['burger-constructor-space']} custom-scroll`}>
             {
               ingredients &&
-              ingredients.map((ingredient) => (
+              ingredients.map((ingredient, index) => (
                 <DragConstructorElement
                   key={ingredient.key}
                   id={ingredient.key}
+                  index={index}
                   text={ingredient.name}
                   price={ingredient.price}
                   thumbnail={ingredient.image}
+                  moveElement={moveElement}
                 />
               ))
             }

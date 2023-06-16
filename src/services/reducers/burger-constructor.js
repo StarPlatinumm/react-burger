@@ -1,4 +1,4 @@
-import { ADD_INGREDIENT, REMOVE_INGREDIENT } from '../actions/burger-constructor';
+import { ADD_INGREDIENT, MOVE_INGREDIENT, REMOVE_INGREDIENT } from '../actions/burger-constructor';
 
 const constructorInitialState = {
   bun: null,
@@ -22,6 +22,18 @@ export const constructorReducer = (state = constructorInitialState, action) => {
           ]
         };
       }
+    }
+    case MOVE_INGREDIENT: {
+      let sortedIngredients = [...state.ingredients];
+      sortedIngredients.splice(
+        action.hoverIndex,
+        0,
+        sortedIngredients.splice(action.dragIndex, 1)[0]
+      );
+      return {
+        ...state,
+        ingredients: sortedIngredients
+      };
     }
     case REMOVE_INGREDIENT: {
       return {

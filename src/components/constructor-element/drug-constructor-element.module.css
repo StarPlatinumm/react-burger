@@ -3,3 +3,7 @@
   display: grid;
   grid-template-columns: 32px 1fr;
 }
+
+.is-dragging {
+  opacity: 0
+}
