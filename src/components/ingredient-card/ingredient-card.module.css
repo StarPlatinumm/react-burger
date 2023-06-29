@@ -19,3 +19,8 @@
 .burger-ingredient-title {
   text-align: center;
 }
+
+.no-decoration {
+  text-decoration: none;
+  color: #fff
+}

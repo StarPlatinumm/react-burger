@@ -3,30 +3,13 @@ import burgerIngredientsStyles from './burger-ingredients.module.css';
 import IngredientCard from '../ingredient-card/ingredient-card';
 import { ingredientType } from '../../utils/types';
 import PropTypes from 'prop-types';
-import Modal from '../modal/modal';
-import { useCallback, useRef, useState } from 'react';
-import { INGREDIENT_DETAILS_SHOW, INGREDIENT_DETAILS_HIDE } from '../../services/actions/ingredient-details';
-import IngredientDetails from '../ingredient-details/ingredient-details';
-import { useDispatch, useSelector } from 'react-redux';
+import { useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 
 function BurgerIngredients(props) {
-  const dispatch = useDispatch();
-  const getStateIngredientDetails = (state) => state.ingredientDetails;
 
-  const { modalIngredient } = useSelector(getStateIngredientDetails);
-
-  const handleOpenModal = useCallback((ingredient) => {
-    dispatch({
-      type: INGREDIENT_DETAILS_SHOW,
-      modalIngredient: ingredient
-    });
-  }, []);
-
-  const handleCloseModal = useCallback(() => {
-    dispatch({
-      type: INGREDIENT_DETAILS_HIDE
-    });
-  }, []);
+  // const getStateIngredientDetails = (state) => state.ingredientDetails;
 
   const tabsRef = useRef(null);
   const bunsRef = useRef(null);
@@ -51,6 +34,8 @@ function BurgerIngredients(props) {
     }
   };
 
+  let location = useLocation();
+
   return (
     <>
       <div className={`${burgerIngredientsStyles['burger-ingredients']} pb-5`}>
@@ -66,7 +51,7 @@ function BurgerIngredients(props) {
             <ul className={`${burgerIngredientsStyles['burger-ingredient-type-ingredient-list']} pt-6 pr-4 pl-4`}>{
               props.ingredientsData.filter(ingredient => ingredient.type === 'bun').map( (ingredient) => (
                 <li key={ingredient._id}>
-                  <IngredientCard ingredient={ingredient} onOpenModal={handleOpenModal}/>
+                  <IngredientCard ingredient={ingredient} location={location}/>
                 </li>
               ))
             }</ul>
@@ -76,7 +61,7 @@ function BurgerIngredients(props) {
             <ul className={`${burgerIngredientsStyles['burger-ingredient-type-ingredient-list']} pt-6 pr-4 pl-4`}>{
               props.ingredientsData.filter(ingredient => ingredient.type === 'sauce').map( (ingredient) => (
                 <li key={ingredient._id}>
-                  <IngredientCard ingredient={ingredient} onOpenModal={handleOpenModal}/>
+                  <IngredientCard ingredient={ingredient} location={location}/>
                 </li>
               ))
             }</ul>
@@ -86,19 +71,13 @@ function BurgerIngredients(props) {
             <ul className={`${burgerIngredientsStyles['burger-ingredient-type-ingredient-list']} pt-6 pr-4 pl-4`}>{
               props.ingredientsData.filter(ingredient => ingredient.type === 'main').map( (ingredient) => (
                 <li key={ingredient._id}>
-                  <IngredientCard ingredient={ingredient} onOpenModal={handleOpenModal}/>
+                  <IngredientCard ingredient={ingredient} location={location}/>
                 </li>
               ))
             }</ul>
           </li>
         </ul>
       </div>
-      {
-        modalIngredient && 
-        <Modal header="Детали ингредиента" onClose={handleCloseModal}> 
-          <IngredientDetails ingredient={modalIngredient} />
-        </Modal>
-      }
     </>
   );
 }
