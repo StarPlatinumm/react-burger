@@ -1,6 +1,6 @@
+import mainStyles from './main.module.css'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import mainStyles from './main.module.css'
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../../components/burger-constructor/burger-constructor';
 import { getIngredients } from '../../services/actions/burger-ingredients';
@@ -23,7 +23,7 @@ function MainPage() {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <main className={`${mainStyles['ingredients-and-constructor']} pl-5 pr-5 text_type_main-default`}>
+      <div className={`${mainStyles['ingredients-and-constructor']}`}>
         {isLoading && 'Загрузка...'}
         {failed && 'Произошла ошибка'}
         {!isLoading &&
@@ -31,7 +31,7 @@ function MainPage() {
           ingredients.length &&
           <BurgerIngredients ingredientsData={ingredients} />}
         <BurgerConstructor />
-      </main>
+      </div>
     </DndProvider>
   );
 }
