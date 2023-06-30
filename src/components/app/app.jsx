@@ -10,12 +10,23 @@ import NotFound404Page from '../../pages/not-found-404/not-find-404';
 import ProfilePage from '../../pages/profile/profile';
 import IngredientDetailsPage from '../../pages/ingredient-details/ingredient-details';
 import Modal from '../modal/modal';
+import { getIngredients } from '../../services/actions/burger-ingredients';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 
 function App() {
   let location = useLocation();
   let navigate = useNavigate();
   let state = location.state;
+
+  const dispatch = useDispatch();
+  useEffect(
+    () => {
+      dispatch(getIngredients());
+    },
+    [dispatch]
+  );
 
   return (
     <div className={appStyles['app']}>
@@ -35,7 +46,7 @@ function App() {
         {state?.backgroundLocation && (
           <Routes>
             <Route path="/ingredients/:id" element={
-              <Modal header="Детали ингредиента" onClose={() => navigate(-1)}><IngredientDetailsPage /></Modal>
+              <Modal header="Детали ингредиента" onClose={() => navigate(-1)}><IngredientDetailsPage isModal={true}/></Modal>
             } />
           </Routes>
         )}

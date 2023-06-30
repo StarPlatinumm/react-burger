@@ -8,9 +8,6 @@ import { useLocation } from 'react-router-dom';
 
 
 function BurgerIngredients(props) {
-
-  // const getStateIngredientDetails = (state) => state.ingredientDetails;
-
   const tabsRef = useRef(null);
   const bunsRef = useRef(null);
   const saucesRef = useRef(null);
