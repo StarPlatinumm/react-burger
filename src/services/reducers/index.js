@@ -6,6 +6,7 @@ import { loginFormReducer } from './form-login';
 import { registerFormReducer } from './form-register';
 import { forgotPasswordFormReducer } from './form-forgot-password';
 import { resetPasswordFormReducer } from './form-reset-password';
+import { userDataReducer } from './user';
 
 
 export const rootReducer = combineReducers({
@@ -16,4 +17,5 @@ export const rootReducer = combineReducers({
   registerForm: registerFormReducer,
   forgotPasswordForm: forgotPasswordFormReducer,
   resetPasswordForm: resetPasswordFormReducer,
+  userData: userDataReducer
 });

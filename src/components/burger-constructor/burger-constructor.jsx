@@ -119,7 +119,8 @@ function BurgerConstructor() {
         (orderDetails || failed) && 
         <Modal header="" onClose={handleCloseModal}> 
           <OrderDetails orderDetails={orderDetails} failed={failed} />
-        </Modal>}
+        </Modal>
+      }
     </>
   );
 }

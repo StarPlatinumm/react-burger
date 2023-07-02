@@ -3,7 +3,7 @@ import formStyles from './form.module.css'
 
 function Form(props) {
   return (
-    <form className={`${formStyles['form']}`}>
+    <form onSubmit={props.onSubmitHandler} className={`${formStyles['form']}`}>
       {props.children}
     </form>
   );

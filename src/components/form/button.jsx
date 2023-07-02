@@ -6,8 +6,7 @@ function FormButton(props) {
   return (
     <div className={`${formStyles['button-wrapper']} pt-6`}>
       <Button
-        onClick={props.onClick}
-        htmlType="button"
+        htmlType="submit"
         type="primary"
         size="large">
           {props.caption}

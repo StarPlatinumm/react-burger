@@ -8,8 +8,8 @@ const getCookie = (name) => {
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-const checkReponse = (res) => {
-  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+const checkResponse = (res) => {
+  return res.ok ? res.json() : res.json().catch((err) => Promise.reject(err));
 };
 
 export const refreshToken = () => {
@@ -21,13 +21,13 @@ export const refreshToken = () => {
     body: JSON.stringify({
       token: localStorage.getItem("refreshToken"),
     }),
-  }).then(checkReponse);
+  }).then(checkResponse);
 };
 
 export const fetchWithRefresh = async (url, options) => {
   try {
     const res = await fetch(url, options);
-    return await checkReponse(res);
+    return await checkResponse(res);
   } catch (err) {
     if (err.message === "jwt expired") {
       const refreshData = await refreshToken();
@@ -38,14 +38,14 @@ export const fetchWithRefresh = async (url, options) => {
       localStorage.setItem("accessToken", refreshData.accessToken);
       options.headers.authorization = refreshData.accessToken;
       const res = await fetch(url, options);
-      return await checkReponse(res);
+      return await checkResponse(res);
     } else {
       return Promise.reject(err);
     }
   }
 };
 
-export const loginUser = (data) => {
+export const loginUserFetch = (data) => {
   return fetch(`${BURGER_API_URL}/auth/login`, {
     method: 'POST',
     headers: {
@@ -53,14 +53,29 @@ export const loginUser = (data) => {
     },
     body: JSON.stringify(data)
   })
-    .then(checkReponse)
+    .then(checkResponse)
     .then((data) => {
       if (data?.success) return data;
       return Promise.reject(data);
     });
 };
 
-export const registerUser = (data) => {
+export const logoutUserFetch = (data) => {
+  return fetch(`${BURGER_API_URL}/auth/logout`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify(data)
+  })
+    .then(checkResponse)
+    .then((data) => {
+      if (data?.success) return data;
+      return Promise.reject(data);
+    });
+};
+
+export const registerUserFetch = (data) => {
   return fetch(`${BURGER_API_URL}/auth/register`, {
     method: 'POST',
     headers: {
@@ -68,7 +83,7 @@ export const registerUser = (data) => {
     },
     body: JSON.stringify(data)
   })
-    .then(checkReponse)
+    .then(checkResponse)
     .then((data) => {
       if (data?.success) return data;
       return Promise.reject(data);
@@ -83,7 +98,7 @@ export const forgotPassword = (data) => {
     },
     body: JSON.stringify(data)
   })
-    .then(checkReponse)
+    .then(checkResponse)
     .then((data) => {
       if (data?.success) return data;
       return Promise.reject(data);
@@ -98,14 +113,14 @@ export const resetPassword = (data) => {
     },
     body: JSON.stringify(data)
   })
-    .then(checkReponse)
+    .then(checkResponse)
     .then((data) => {
       if (data?.success) return data;
       return Promise.reject(data);
     });
 };
 
-export const getUser = () => {
+export const getUserFetch = () => {
   return fetchWithRefresh(`${BURGER_API_URL}/auth/user`, {
     headers: {
       authorization: getCookie('accessToken')
@@ -113,7 +128,7 @@ export const getUser = () => {
   });
 };
 
-export const updateUser = (user) => {
+export const updateUserFetch = (user) => {
   return fetchWithRefresh(`${BURGER_API_URL}/auth/user`, {
     method: 'PATCH',
     headers: {
@@ -126,7 +141,7 @@ export const updateUser = (user) => {
 
 export const getIngredientsFetch = () => {
   return fetch(`${BURGER_API_URL}/ingredients`)
-    .then(checkReponse)
+    .then(checkResponse)
     .then((data) => {
       if (data?.success) return data;
       return Promise.reject(data);
