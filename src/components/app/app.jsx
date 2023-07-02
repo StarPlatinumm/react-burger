@@ -13,6 +13,8 @@ import Modal from '../modal/modal';
 import { getIngredients } from '../../services/actions/burger-ingredients';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { OnlyAuth, OnlyUnAuth } from '../protected-route/protected-route';
+import { checkUserAuth } from '../../services/actions/user';
 
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
   useEffect(
     () => {
       dispatch(getIngredients());
+      dispatch(checkUserAuth());
     },
     [dispatch]
   );
@@ -36,11 +39,11 @@ function App() {
           <Route path="*" element={<NotFound404Page />} />
           <Route path="/" element={<MainPage />} />
           <Route path="/ingredients/:id" element={<IngredientDetailsPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/reset-password" element={<ResetPasswordPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/login" element={<OnlyUnAuth component={<LoginPage />}/>} />
+          <Route path="/register" element={<OnlyUnAuth component={<RegisterPage />}/>} />
+          <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPasswordPage />}/>} />
+          <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPasswordPage />}/>} />
+          <Route path="/profile" element={<OnlyAuth component={<ProfilePage />}/>} />
         </Routes>
 
         {state?.backgroundLocation && (

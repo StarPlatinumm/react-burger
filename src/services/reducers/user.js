@@ -6,13 +6,14 @@ import {
     UPDATE_USER,
     USER_REQUEST_LOADING,
     USER_REQUEST_FAILED,
-    CLOSE_ERROR
+    CLOSE_ERROR,
+    SET_AUTH_CHECKED
   } from "../actions/user";
   
   const userInitialState = {
     isLoading: false,
     failed: false,
-    registred: false,
+    isAuthChecked: false,
     message: '',
     name: '',
     email: '',
@@ -26,9 +27,6 @@ import {
           ...state,
           failed: false,
           isLoading: true,
-          name: null,
-          email: null,
-          password: null
         };
       }
       case USER_REQUEST_FAILED: {
@@ -50,9 +48,23 @@ import {
           email: action.data.user.email
         };
       }
-      case LOGOUT_USER:
+      case SET_AUTH_CHECKED: {
+        return {
+          ...state,
+          isAuthChecked: true
+        };
+      }
+      case LOGOUT_USER: {
+        return {
+          ...userInitialState,
+          isAuthChecked: true
+        };
+      }
       case CLOSE_ERROR: {
-        return userInitialState;
+        return {
+          ...state,
+          failed: false
+        };
       }
       default: {
         return state;

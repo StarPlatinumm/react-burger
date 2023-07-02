@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { EmailInput, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import { setRegisterFormValue } from '../../services/actions/form-register';
@@ -34,6 +35,13 @@ function RegisterPage() {
       type: CLOSE_ERROR
     });
   };
+
+  useEffect(
+    () => {
+      dispatch({ type: CLOSE_ERROR });
+    },
+    []
+  );
 
   return (
     <>

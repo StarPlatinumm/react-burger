@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import { setLoginFormValue } from '../../services/actions/form-login';
@@ -22,10 +23,10 @@ function LoginPage() {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    loginUser({
+    dispatch(loginUser({
       email: email,
       password: password
-    });
+    }));
   };
 
   const handleCloseModal = () => {
@@ -33,6 +34,13 @@ function LoginPage() {
       type: CLOSE_ERROR
     });
   };
+
+  useEffect(
+    () => {
+      dispatch({ type: CLOSE_ERROR });
+    },
+    []
+  );
 
   return (
     <>
