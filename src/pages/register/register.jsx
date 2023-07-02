@@ -20,12 +20,13 @@ function RegisterPage() {
     dispatch(setRegisterFormValue(e.target.name, e.target.value))
   };
 
-  const onSubmitHandler = () => {
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
     dispatch(registerUser({
       name: name,
       email: email,
       password: password
-    }));
+    }))
   };
 
   const handleCloseModal = () => {

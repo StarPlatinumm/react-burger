@@ -60,13 +60,13 @@ export const loginUserFetch = (data) => {
     });
 };
 
-export const logoutUserFetch = (data) => {
+export const logoutUserFetch = () => {
   return fetch(`${BURGER_API_URL}/auth/logout`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify({token: localStorage.getItem("refreshToken")})
   })
     .then(checkResponse)
     .then((data) => {

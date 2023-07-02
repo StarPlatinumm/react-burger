@@ -20,11 +20,12 @@ function LoginPage() {
     dispatch(setLoginFormValue(e.target.name, e.target.value))
   };
 
-  const onSubmitHandler = () => {
-    dispatch(loginUser({
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    loginUser({
       email: email,
       password: password
-    }));
+    });
   };
 
   const handleCloseModal = () => {

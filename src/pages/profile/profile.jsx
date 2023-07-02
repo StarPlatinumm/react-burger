@@ -1,21 +1,34 @@
 import profileStyles from './profile.module.css'
 import { useSelector, useDispatch } from 'react-redux';
-import { Input, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
+import { useNavigate } from 'react-router-dom';
+import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { setRegisterFormValue } from '../../services/actions/form-register';
 import Form from '../../components/form';
 import FormButton from '../../components/form/button';
+import { logoutUserFetch } from '../../utils/api';
+import { LOGOUT_USER } from '../../services/actions/user';
 
 
 function ProfilePage() {
   const { name, email, password } = useSelector(state => state.registerForm.form);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onFormChange = (e) => {
     dispatch(setRegisterFormValue(e.target.name, e.target.value))
   }
 
-  const onButtonClick = () => {
+  const onLogoutHandler = () => {
+    logoutUserFetch()
+      .then((data) => {
+        dispatch({ type: LOGOUT_USER });
+        navigate('/login');
+      })
+      .catch();
+  }
+
+  const onSubmitHandler = () => {
     console.log('onButtonClick fired');
   }
 
@@ -28,7 +41,7 @@ function ProfilePage() {
         <li className={`${profileStyles['menu-item']}`}>
           <span>История заказов</span>
         </li>
-        <li className={`${profileStyles['menu-item']}`}>
+        <li className={`${profileStyles['menu-item']}`} onClick={onLogoutHandler}>
           <span>Выход</span>
         </li>
         <li className={`${profileStyles['menu-item']}`}></li>
@@ -37,7 +50,7 @@ function ProfilePage() {
         </li>
       </ul>
       <div>
-        <Form >
+        <Form onSubmitHandler={onSubmitHandler}>
           <Input
             onChange={onFormChange}
             value={name}
@@ -59,8 +72,9 @@ function ProfilePage() {
             extraClass="pt-6"
           />
           <div className={`${profileStyles['form-buttons']}`}>
-            <a href='/' className='pt-6 pr-6'>Отменить</a>
-            <FormButton caption='Сохранить' onClick={onButtonClick}/>
+            <Button htmlType="button" type="secondary" size="medium" extraClass='pt-10' onClick={() => console.log('Cancel button pressed')}>Отменить</Button>
+            {/* <a href='/' className='pt-6 pr-6'>Отменить</a> */}
+            <FormButton caption='Сохранить'/>
           </div>
         </Form>
       </div>
