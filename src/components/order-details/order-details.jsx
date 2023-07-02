@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 function OrderDetails(props) {
   const { orderDetails, failed } = props;
-  console.log(failed);
   return (
     <>
     {

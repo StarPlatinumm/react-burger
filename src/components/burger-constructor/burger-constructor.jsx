@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback } from 'react';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import burgerConstructorStyles from './burger-constructor.module.css';
@@ -7,18 +8,29 @@ import OrderDetails from '../order-details/order-details';
 import { getOrderDetails, ORDER_DETAILS_CLOSE } from '../../services/actions/order-details';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from "react-dnd";
-import { ADD_INGREDIENT, MOVE_INGREDIENT } from '../../services/actions/burger-constructor';
+import { ADD_INGREDIENT, MOVE_INGREDIENT, CLEAR_INGREDIENTS } from '../../services/actions/burger-constructor';
+import { useNavigate } from 'react-router-dom';
+import LoadingSpinner from '../spinner/spinner';
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
   const getStateOrderDetails = (state) => state.orderDetails;
   const getStateBurgerConstructor = (state) => state.burgerConstructor;
+  const getStateUserData = (state) => state.userData;
   
-  const { orderDetails, failed } = useSelector(getStateOrderDetails);
+  const { orderDetails, failed, isLoading } = useSelector(getStateOrderDetails);
   const { bun, ingredients } = useSelector(getStateBurgerConstructor);
+  const { name } = useSelector(getStateUserData);
+
+  let navigate = useNavigate();
 
   const handleOpenModal = () => {
-    dispatch(getOrderDetails([bun?._id, bun?._id, ...ingredients.map((item) => item._id)]));
+    if (name === '') {
+      navigate('/login');
+    } else {
+      dispatch(getOrderDetails([bun?._id, bun?._id, ...ingredients.map((item) => item._id)]));
+      dispatch({ type: CLEAR_INGREDIENTS});
+    }
   };
 
   const handleCloseModal = () => {
@@ -111,14 +123,25 @@ function BurgerConstructor() {
             <div>{reduceTotal()}</div>
             <div><CurrencyIcon type="primary" /></div>
           </div> {/* sum */}
-          <Button htmlType="button" type="primary" size="large" onClick={handleOpenModal}>Оформить заказ</Button>
+          {
+            bun &&
+            <Button htmlType="button" type="primary" size="large" onClick={handleOpenModal}>Оформить заказ</Button>
+          }
         </div>
       </div>
       {
         (orderDetails || failed) && 
         <Modal header="" onClose={handleCloseModal}> 
           <OrderDetails orderDetails={orderDetails} failed={failed} />
-        </Modal>}
+        </Modal>
+      }
+      {
+        isLoading && 
+        <Modal header=""> 
+          <LoadingSpinner/>
+          <span className='pt-6 pb-20 pr-10 text text_type_main-medium'>Ваш заказ обрабатывается...</span>
+        </Modal>
+      }
     </>
   );
 }
