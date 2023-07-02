@@ -7,6 +7,7 @@ function AppHeader() {
     <header className={`${appHeaderStyles['header']} text text_type_main-default pt-3 pb-3`}>
       <nav>
         <ul className={`${appHeaderStyles['menu-list']} pt-4 pb-4`}>
+
           <NavLink
             to={{ pathname: `/` }}
             className={({ isActive }) => (
@@ -21,6 +22,7 @@ function AppHeader() {
               <span className='ml-2'>Конструктор</span>
             </li>
           </NavLink>
+
           <NavLink
             to={{ pathname: `/x` }}
             className={({ isActive }) => (
@@ -35,11 +37,17 @@ function AppHeader() {
               <span className='ml-2'>Лента заказов</span>
             </li>
           </NavLink>
+
+          <NavLink
+            to={{ pathname: `/` }}
+          >
           <li className={`${appHeaderStyles['logo']}`}>
             <Logo />
           </li>
+          </NavLink>
+
           <NavLink
-            to={{ pathname: `/login` }}
+            to={{ pathname: `/profile` }}
             className={({ isActive }) => (
               isActive ? (
                 `${appHeaderStyles['active-link']}`
@@ -52,6 +60,7 @@ function AppHeader() {
               <span className='ml-2'>Личный кабинет</span>
             </li>
           </NavLink>
+
         </ul>
       </nav>
     </header>
