@@ -50,7 +50,7 @@ export function loginUser(data) {
           type: USER_REQUEST_FAILED,
           message: data.message
         });
-      })
+      });
   };
 }
 
@@ -60,18 +60,21 @@ export function logoutUser() {
       type: USER_REQUEST_LOADING
     });
 
-    logoutUserFetch().then(data => {
-      if (data && data.success) {
+    logoutUserFetch()
+      .then(data => {
+        if (data && data.success) {
+          dispatch({
+            type: LOGOUT_USER,
+            data: data
+          });
+        }
+      })
+      .catch(data => {
         dispatch({
-          type: LOGOUT_USER,
-          data: data
+          type: USER_REQUEST_FAILED,
+          message: data.message
         });
-      } else {
-        dispatch({
-          type: USER_REQUEST_FAILED
-        });
-      }
-    })
+      });
   };
 }
 
@@ -107,18 +110,25 @@ export function getUserData() {
       type: USER_REQUEST_LOADING
     });
 
-    getUserFetch().then(data => {
-      if (data && data.success) {
+    getUserFetch()
+      .then(data => {
+        if (data && data.success) {
+          dispatch({
+            type: GET_USER,
+            data: data
+          });
+        } else {
+          dispatch({
+            type: USER_REQUEST_FAILED
+          });
+        }
+      })
+      .catch(data => {
         dispatch({
-          type: GET_USER,
-          data: data
+          type: USER_REQUEST_FAILED,
+          message: data.message
         });
-      } else {
-        dispatch({
-          type: USER_REQUEST_FAILED
-        });
-      }
-    })
+      });
   };
 }
 
@@ -128,17 +138,24 @@ export function updateUserData(data) {
       type: USER_REQUEST_LOADING
     });
 
-    updateUserFetch(data).then(data => {
-      if (data && data.success) {
+    updateUserFetch(data)
+      .then(data => {
+        if (data && data.success) {
+          dispatch({
+            type: UPDATE_USER,
+            data: data
+          });
+        } else {
+          dispatch({
+            type: USER_REQUEST_FAILED
+          });
+        }
+      })
+      .catch(data => {
         dispatch({
-          type: UPDATE_USER,
-          data: data
+          type: USER_REQUEST_FAILED,
+          message: data.message
         });
-      } else {
-        dispatch({
-          type: USER_REQUEST_FAILED
-        });
-      }
-    })
+      });
   };
 }
