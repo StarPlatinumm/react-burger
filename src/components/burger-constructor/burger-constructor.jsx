@@ -8,7 +8,7 @@ import OrderDetails from '../order-details/order-details';
 import { getOrderDetails, ORDER_DETAILS_CLOSE } from '../../services/actions/order-details';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from "react-dnd";
-import { ADD_INGREDIENT, MOVE_INGREDIENT } from '../../services/actions/burger-constructor';
+import { ADD_INGREDIENT, MOVE_INGREDIENT, CLEAR_INGREDIENTS } from '../../services/actions/burger-constructor';
 import { useNavigate } from 'react-router-dom';
 
 function BurgerConstructor() {
@@ -28,6 +28,7 @@ function BurgerConstructor() {
       navigate('/login');
     } else {
       dispatch(getOrderDetails([bun?._id, bun?._id, ...ingredients.map((item) => item._id)]));
+      dispatch({ type: CLEAR_INGREDIENTS});
     }
   };
 
