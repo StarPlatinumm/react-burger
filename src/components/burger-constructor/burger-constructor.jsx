@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from "react-dnd";
 import { ADD_INGREDIENT, MOVE_INGREDIENT, CLEAR_INGREDIENTS } from '../../services/actions/burger-constructor';
 import { useNavigate } from 'react-router-dom';
+import LoadingSpinner from '../spinner/spinner';
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ function BurgerConstructor() {
   const getStateBurgerConstructor = (state) => state.burgerConstructor;
   const getStateUserData = (state) => state.userData;
   
-  const { orderDetails, failed } = useSelector(getStateOrderDetails);
+  const { orderDetails, failed, isLoading } = useSelector(getStateOrderDetails);
   const { bun, ingredients } = useSelector(getStateBurgerConstructor);
   const { name } = useSelector(getStateUserData);
 
@@ -132,6 +133,13 @@ function BurgerConstructor() {
         (orderDetails || failed) && 
         <Modal header="" onClose={handleCloseModal}> 
           <OrderDetails orderDetails={orderDetails} failed={failed} />
+        </Modal>
+      }
+      {
+        isLoading && 
+        <Modal header=""> 
+          <LoadingSpinner/>
+          <span className='pt-6 pb-20 pr-10 text text_type_main-medium'>Ваш заказ обрабатывается...</span>
         </Modal>
       }
     </>
