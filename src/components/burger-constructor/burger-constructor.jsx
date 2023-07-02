@@ -122,7 +122,10 @@ function BurgerConstructor() {
             <div>{reduceTotal()}</div>
             <div><CurrencyIcon type="primary" /></div>
           </div> {/* sum */}
-          <Button htmlType="button" type="primary" size="large" onClick={handleOpenModal}>Оформить заказ</Button>
+          {
+            bun &&
+            <Button htmlType="button" type="primary" size="large" onClick={handleOpenModal}>Оформить заказ</Button>
+          }
         </div>
       </div>
       {
