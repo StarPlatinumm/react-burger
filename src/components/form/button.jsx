@@ -1,5 +1,6 @@
 import formStyles from './form.module.css'
 import {  Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import PropTypes from 'prop-types';
 
 
 function FormButton(props) {
@@ -14,5 +15,9 @@ function FormButton(props) {
     </div>
   );
 }
+
+FormButton.propTypes = {
+  caption: PropTypes.string
+}; 
 
 export default FormButton;

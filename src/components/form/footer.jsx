@@ -1,4 +1,5 @@
 import formStyles from './form.module.css'
+import PropTypes from 'prop-types';
 
 
 function Footer(props) {
@@ -8,5 +9,9 @@ function Footer(props) {
     </div>
   );
 }
+
+Footer.propTypes = {
+  children: PropTypes.node
+}; 
 
 export default Footer;

@@ -12,7 +12,8 @@ import Modal from '../../components/modal/modal';
 
 
 function ResetPasswordPage() {
-  const { newPassword, code } = useSelector(state => state.resetPasswordForm.form);
+  const getStateResetPasswordForm = (state) => state.resetPasswordForm.form;
+  const { newPassword, code } = useSelector(getStateResetPasswordForm);
 
   const dispatch = useDispatch();
 

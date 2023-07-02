@@ -11,7 +11,8 @@ import { updateUserData } from '../../services/actions/user';
 
 
 function ProfilePage() {
-  const { name, email } = useSelector(state => state.userData);
+  const getStateUserData = (state) => state.userData;
+  const { name, email } = useSelector(getStateUserData);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -36,6 +37,7 @@ function ProfilePage() {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     dispatch(updateUserData(formData));
+    setIsDataChanged(false);
   }
 
   const onResetClickHandler = () => {

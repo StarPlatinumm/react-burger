@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import IngredientDetails from '../../components/ingredient-details/ingredient-details';
+import PropTypes from 'prop-types';
 
 
 function IngredientDetailsPage(props) {
@@ -17,5 +18,9 @@ function IngredientDetailsPage(props) {
     </>
   );
 }
+
+IngredientDetailsPage.propTypes = {
+  isModal: PropTypes.bool
+}; 
 
 export default IngredientDetailsPage;

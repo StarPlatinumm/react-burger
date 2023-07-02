@@ -9,17 +9,26 @@ import { getOrderDetails, ORDER_DETAILS_CLOSE } from '../../services/actions/ord
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from "react-dnd";
 import { ADD_INGREDIENT, MOVE_INGREDIENT } from '../../services/actions/burger-constructor';
+import { useNavigate } from 'react-router-dom';
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
   const getStateOrderDetails = (state) => state.orderDetails;
   const getStateBurgerConstructor = (state) => state.burgerConstructor;
+  const getStateUserData = (state) => state.userData;
   
   const { orderDetails, failed } = useSelector(getStateOrderDetails);
   const { bun, ingredients } = useSelector(getStateBurgerConstructor);
+  const { name } = useSelector(getStateUserData);
+
+  let navigate = useNavigate();
 
   const handleOpenModal = () => {
-    dispatch(getOrderDetails([bun?._id, bun?._id, ...ingredients.map((item) => item._id)]));
+    if (name === '') {
+      navigate('/login');
+    } else {
+      dispatch(getOrderDetails([bun?._id, bun?._id, ...ingredients.map((item) => item._id)]));
+    }
   };
 
   const handleCloseModal = () => {

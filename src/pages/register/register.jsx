@@ -12,8 +12,10 @@ import Modal from '../../components/modal/modal';
 
 
 function RegisterPage() {
-  const { name, email, password } = useSelector(state => state.registerForm.form);
-  const { failed, message } = useSelector(state => state.userData);
+  const getStateUserData = (state) => state.userData;
+  const getStateRegisterForm = (state) => state.registerForm.form;
+  const { name, email, password } = useSelector(getStateRegisterForm);
+  const { failed, message } = useSelector(getStateUserData);
 
   const dispatch = useDispatch();
 

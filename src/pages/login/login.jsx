@@ -12,8 +12,10 @@ import Modal from '../../components/modal/modal';
 
 
 function LoginPage() {
-  const { email, password } = useSelector(state => state.loginForm.form);
-  const { failed, message } = useSelector(state => state.userData);
+  const getStateUserData = (state) => state.userData;
+  const getStateLoginForm = (state) => state.loginForm.form;
+  const { email, password } = useSelector(getStateLoginForm);
+  const { failed, message } = useSelector(getStateUserData);
 
   const dispatch = useDispatch();
 

@@ -12,7 +12,8 @@ import Modal from '../../components/modal/modal';
 
 
 function ForgotPasswordPage() {
-  const { email } = useSelector(state => state.forgotPasswordForm.form);
+  const getStateForgotPasswordForm = (state) => state.forgotPasswordForm.form;
+  const { email } = useSelector(getStateForgotPasswordForm);
 
   const dispatch = useDispatch();
 
