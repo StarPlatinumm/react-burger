@@ -18,3 +18,16 @@
   display: flex;
   justify-content: center;
 }
+
+.inactive-link {
+  text-decoration: none
+}
+
+.active-link {
+  text-decoration: none;
+  color: #fff
+}
+
+.active-link svg{
+  fill: #fff
+}

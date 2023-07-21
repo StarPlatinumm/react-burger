@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { useDrag } from "react-dnd";
 import { useSelector } from 'react-redux';
 import { useCallback } from 'react';
+import { Link } from 'react-router-dom';
 
 function IngredientCard(props) {
   const [, dragRef] = useDrag({
@@ -24,25 +25,32 @@ function IngredientCard(props) {
   }, [bun, ingredients]);
 
   return (
-    <div ref={dragRef} className={`${ingredientCardStyles['burger-ingredient']}`} onClick={() => props.onOpenModal(props.ingredient)}>
-      {countIngredients() !== 0 && <Counter count={countIngredients()} />}
-      <div className={`${ingredientCardStyles['burger-ingredient-image-wrapper']}`}>
-        <img src={props.ingredient.image} alt={props.ingredient.name} />
+    <Link
+      key={props.ingredient._id}
+      to={`/ingredients/${props.ingredient._id}`}
+      state={{ backgroundLocation: props.location }}
+      className={`${ingredientCardStyles['no-decoration']}`}
+    >
+      <div ref={dragRef} className={`${ingredientCardStyles['burger-ingredient']}`}>
+        {countIngredients() !== 0 && <Counter count={countIngredients()} />}
+        <div className={`${ingredientCardStyles['burger-ingredient-image-wrapper']}`}>
+          <img src={props.ingredient.image} alt={props.ingredient.name} />
+        </div>
+        <div className={`${ingredientCardStyles['burger-ingredient-price-wrapper']} text text_type_digits-default pt-1 pb-1`}>
+          <div>{props.ingredient.price}</div>
+          <CurrencyIcon type="primary" />
+        </div>
+        <div className={`${ingredientCardStyles['burger-ingredient-title']}`}>
+          {props.ingredient.name}
+        </div>
       </div>
-      <div className={`${ingredientCardStyles['burger-ingredient-price-wrapper']} text text_type_digits-default pt-1 pb-1`}>
-        <div>{props.ingredient.price}</div>
-        <CurrencyIcon type="primary" />
-      </div>
-      <div className={`${ingredientCardStyles['burger-ingredient-title']}`}>
-        {props.ingredient.name}
-      </div>
-    </div>
+    </Link>
   );
 }
 
 IngredientCard.propTypes = {
   ingredient: ingredientType.isRequired,
-  onOpenModal: PropTypes.func.isRequired
+  location: PropTypes.object.isRequired
 }; 
 
 export default IngredientCard;

@@ -33,7 +33,7 @@ function Modal(props) {
               {header}
             </div>
             <button  className={`${modalStyles['modal-header-close-button']}`}>
-              <CloseIcon onClick={onClose}/>
+              { onClose && <CloseIcon onClick={onClose}/>}
             </button>
           </div>
           <div className={`${modalStyles['modal-content']}`}>
@@ -49,7 +49,7 @@ function Modal(props) {
 
 Modal.propTypes = {
   header: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
   children: PropTypes.node,
 }
 

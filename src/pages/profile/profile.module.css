@@ -1,0 +1,38 @@
+.profile-page {
+  height: calc(100vh - 88px);
+  width: 100%;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+}
+
+.menu {
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  line-height: 30px;
+  list-style: none;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  cursor: pointer;
+}
+
+.menu-item-active {
+  color: #fff;
+}
+
+.menu-footer {
+  font-size: 16px;
+  color: #838383
+}
+
+.form-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: flex-end;
+}
