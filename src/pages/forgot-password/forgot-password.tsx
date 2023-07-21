@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import { setForgotPasswordFormValue } from '../../services/actions/form-forgot-password';
@@ -12,21 +12,22 @@ import Modal from '../../components/modal/modal';
 
 
 function ForgotPasswordPage() {
+  //@ts-ignore
   const getStateForgotPasswordForm = (state) => state.forgotPasswordForm.form;
   const { email } = useSelector(getStateForgotPasswordForm);
 
   const dispatch = useDispatch();
 
-  const onFormChange = (e) => {
+  const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setForgotPasswordFormValue(e.target.name, e.target.value))
   }
 
-  const [modalMessage, setModalMessage] = useState();
-  const [modalHeader, setModalHeader] = useState();
+  const [modalMessage, setModalMessage] = useState<string | null>(null);
+  const [modalHeader, setModalHeader] = useState<string | null>(null);
 
   const handleCloseModal = () => setModalMessage(null);
 
-  const onSubmitHandler = async (e) => {
+  const onSubmitHandler = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     forgotPassword({ email: email })
       .then((data) => {

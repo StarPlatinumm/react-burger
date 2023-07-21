@@ -11,11 +11,16 @@ import { useDrop } from "react-dnd";
 import { ADD_INGREDIENT, MOVE_INGREDIENT, CLEAR_INGREDIENTS } from '../../services/actions/burger-constructor';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../spinner/spinner';
+import { AnyAction } from 'redux';
+import { TIngredient } from '../../utils/types';
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
+  //@ts-ignore
   const getStateOrderDetails = (state) => state.orderDetails;
+  //@ts-ignore
   const getStateBurgerConstructor = (state) => state.burgerConstructor;
+  //@ts-ignore
   const getStateUserData = (state) => state.userData;
   
   const { orderDetails, failed, isLoading } = useSelector(getStateOrderDetails);
@@ -28,7 +33,7 @@ function BurgerConstructor() {
     if (name === '') {
       navigate('/login');
     } else {
-      dispatch(getOrderDetails([bun?._id, bun?._id, ...ingredients.map((item) => item._id)]));
+      dispatch(getOrderDetails([bun?._id, bun?._id, ...ingredients.map((item: TIngredient) => item._id)]) as unknown as AnyAction);
       dispatch({ type: CLEAR_INGREDIENTS});
     }
   };
@@ -42,13 +47,13 @@ function BurgerConstructor() {
   const reduceTotal = useCallback(() => {
     return (bun?.price ? bun.price : 0) * 2 +
       ingredients.reduce(
-        (acc, item) => acc + item.price, 0
+        (acc: number, item: TIngredient) => acc + item.price, 0
       );
   }, [bun, ingredients]);
 
   const [, dropTarget] = useDrop({
     accept: "ingredient",
-    drop(ingredient) {
+    drop(ingredient: TIngredient) {
       ingredient.name &&
       dispatch({
         type: ADD_INGREDIENT,
@@ -57,7 +62,7 @@ function BurgerConstructor() {
     },
   });
 
-  const moveElement = useCallback((dragIndex, hoverIndex) => {
+  const moveElement = useCallback((dragIndex: number, hoverIndex: number) => {
     dispatch({
       type: MOVE_INGREDIENT,
       dragIndex: dragIndex,
@@ -91,7 +96,7 @@ function BurgerConstructor() {
           <div className={`${burgerConstructorStyles['burger-constructor-space']} custom-scroll`}>
             {
               ingredients &&
-              ingredients.map((ingredient, index) => (
+              ingredients.map((ingredient: TIngredient, index: number) => (
                 <DragConstructorElement
                   key={ingredient.key}
                   id={ingredient.key}
@@ -137,7 +142,7 @@ function BurgerConstructor() {
       }
       {
         isLoading && 
-        <Modal header=""> 
+        <Modal header="" onClose={() => {}}> 
           <LoadingSpinner/>
           <span className='pt-6 pb-20 pr-10 text text_type_main-medium'>Ваш заказ обрабатывается...</span>
         </Modal>

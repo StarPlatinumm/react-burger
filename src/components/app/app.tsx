@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { OnlyAuth, OnlyUnAuth } from '../protected-route/protected-route';
 import { checkUserAuth } from '../../services/actions/user';
+import { AnyAction } from 'redux';
 
 
 function App() {
@@ -25,8 +26,8 @@ function App() {
   const dispatch = useDispatch();
   useEffect(
     () => {
-      dispatch(getIngredients());
-      dispatch(checkUserAuth());
+      dispatch(getIngredients() as unknown as AnyAction);
+      dispatch(checkUserAuth() as unknown as AnyAction);
     },
     [dispatch]
   );

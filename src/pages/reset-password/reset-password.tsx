@@ -12,21 +12,22 @@ import Modal from '../../components/modal/modal';
 
 
 function ResetPasswordPage() {
+  //@ts-ignore
   const getStateResetPasswordForm = (state) => state.resetPasswordForm.form;
   const { newPassword, code } = useSelector(getStateResetPasswordForm);
 
   const dispatch = useDispatch();
 
-  const onFormChange = (e) => {
+  const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setResetPasswordFormValue(e.target.name, e.target.value))
   }
 
-  const [modalMessage, setModalMessage] = useState();
-  const [modalHeader, setModalHeader] = useState();
+  const [modalMessage, setModalMessage] = useState<string | null>(null);
+  const [modalHeader, setModalHeader] = useState<string | null>(null);
 
   const handleCloseModal = () => setModalMessage(null);
 
-  const onSubmitHandler = async (e) => {
+  const onSubmitHandler = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     resetPassword({ password: newPassword, token: code })
       .then((data) => {

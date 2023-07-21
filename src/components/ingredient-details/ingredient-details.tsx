@@ -1,8 +1,11 @@
 import ingredientDetailsStyles from './ingredient-details.module.css';
-import { ingredientType } from '../../utils/types';
+import { TIngredient } from '../../utils/types';
 
+type TProps = {
+  ingredient: TIngredient
+}
 
-function IngredientDetails(props) {
+function IngredientDetails(props: TProps) {
   return (
     <div className={`${ingredientDetailsStyles['ingredient-details']} mb-5`}>
       <div className={`${ingredientDetailsStyles['ingredient-details-picture-wrapper']} pl-5 pr-5`}>
@@ -31,10 +34,6 @@ function IngredientDetails(props) {
       </div>
     </div>
   );
-}
-
-IngredientDetails.propTypes = {
-  ingredient: ingredientType.isRequired
 }
 
 export default IngredientDetails;
