@@ -1,18 +1,17 @@
+import { ReactNode } from 'react';
 import formStyles from './form.module.css'
-import PropTypes from 'prop-types';
 
+type TProps = {
+  onSubmitHandler: (e: React.SyntheticEvent<HTMLFormElement, Event>) => void,
+  children: ReactNode
+}
 
-function Form(props) {
+function Form(props: TProps) {
   return (
     <form onSubmit={props.onSubmitHandler} className={`${formStyles['form']}`}>
       {props.children}
     </form>
   );
 }
-
-Form.propTypes = {
-  onSubmitHandler: PropTypes.func,
-  children: PropTypes.node
-}; 
 
 export default Form;

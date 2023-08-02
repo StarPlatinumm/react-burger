@@ -1,17 +1,23 @@
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ingredientCardStyles from './ingredient-card.module.css';
-import { ingredientType } from '../../utils/types';
-import PropTypes from 'prop-types';
 import { useDrag } from "react-dnd";
 import { useSelector } from 'react-redux';
 import { useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Location } from 'react-router-dom';
+import { TIngredient } from '../../utils/types';
 
-function IngredientCard(props) {
+type TProps = {
+  ingredient: TIngredient,
+  location: Location
+}
+
+function IngredientCard(props: TProps) {
   const [, dragRef] = useDrag({
     type: "ingredient",
     item: props.ingredient
   });
+
+  //@ts-ignore
   const getStateBurgerConstructor = (state) => state.burgerConstructor;
 
   const { bun, ingredients } = useSelector(getStateBurgerConstructor);
@@ -20,7 +26,7 @@ function IngredientCard(props) {
     if (props.ingredient.type === 'bun') {
       return bun?._id === props.ingredient._id ? 2 : 0;
     } else {
-      return ingredients.filter(item => item._id === props.ingredient._id).length;
+      return ingredients.filter((item: TIngredient) => item._id === props.ingredient._id).length;
     }
   }, [bun, ingredients]);
 
@@ -47,10 +53,5 @@ function IngredientCard(props) {
     </Link>
   );
 }
-
-IngredientCard.propTypes = {
-  ingredient: ingredientType.isRequired,
-  location: PropTypes.object.isRequired
-}; 
 
 export default IngredientCard;

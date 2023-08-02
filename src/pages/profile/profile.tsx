@@ -8,9 +8,11 @@ import FormButton from '../../components/form/button';
 import { logoutUserFetch } from '../../utils/api';
 import { LOGOUT_USER } from '../../services/actions/user';
 import { updateUserData } from '../../services/actions/user';
+import { AnyAction } from 'redux';
 
 
 function ProfilePage() {
+  //@ts-ignore
   const getStateUserData = (state) => state.userData;
   const { name, email } = useSelector(getStateUserData);
 
@@ -34,9 +36,9 @@ function ProfilePage() {
       .catch();
   }
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(updateUserData(formData));
+    dispatch(updateUserData(formData) as unknown as AnyAction);
     setIsDataChanged(false);
   }
 
@@ -60,7 +62,7 @@ function ProfilePage() {
     []
   );
 
-  const onFormChange = (e) => {
+  const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsDataChanged(true);
     setFormData({
       ...formData,

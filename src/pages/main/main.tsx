@@ -7,6 +7,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 
 function MainPage() {
+  //@ts-ignore
   const getStateIngredients = (state) => state.ingredients;
   
   const { isLoading, failed, ingredients } = useSelector(getStateIngredients);
@@ -19,7 +20,7 @@ function MainPage() {
         {!isLoading &&
           !failed &&
           ingredients.length &&
-          <BurgerIngredients ingredientsData={ingredients} />}
+          <BurgerIngredients ingredients={ingredients} />}
         <BurgerConstructor />
       </div>
     </DndProvider>

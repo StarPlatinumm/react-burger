@@ -1,9 +1,11 @@
 import formStyles from './form.module.css'
 import {  Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import PropTypes from 'prop-types';
 
+type TProps = {
+  caption: string
+}
 
-function FormButton(props) {
+function FormButton(props: TProps) {
   return (
     <div className={`${formStyles['button-wrapper']} pt-6`}>
       <Button
@@ -15,9 +17,5 @@ function FormButton(props) {
     </div>
   );
 }
-
-FormButton.propTypes = {
-  caption: PropTypes.string
-}; 
 
 export default FormButton;

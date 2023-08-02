@@ -1,17 +1,23 @@
 import ReactDOM from 'react-dom';
-import { useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import modalStyles from './modal.module.css';
 import PropTypes from 'prop-types';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 
-const modalRoot = document.getElementById("react-modals");
+type TProps = {
+  header: string | null,
+  onClose: () => void,
+  children: ReactNode
+}
 
-function Modal(props) {
+const modalRoot = document.getElementById("react-modals")!;
+
+function Modal(props: TProps) {
   const { children, header, onClose } = props;
 
   useEffect(() => {
-    const handleCloseOnEsc = (e) => {
+    const handleCloseOnEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         onClose();
       }
@@ -33,7 +39,7 @@ function Modal(props) {
               {header}
             </div>
             <button  className={`${modalStyles['modal-header-close-button']}`}>
-              { onClose && <CloseIcon onClick={onClose}/>}
+              { onClose && <CloseIcon type='primary' onClick={onClose}/>}
             </button>
           </div>
           <div className={`${modalStyles['modal-content']}`}>

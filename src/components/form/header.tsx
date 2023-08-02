@@ -1,15 +1,14 @@
+import { ReactNode } from 'react';
 import formStyles from './form.module.css'
-import PropTypes from 'prop-types';
 
+type TProps = {
+  children: ReactNode
+}
 
-function Header(props) {
+function Header(props: TProps) {
   return (
     <span className={`${formStyles['header']}`}>{props.children}</span>
   );
 }
-
-Header.propTypes = {
-  children: PropTypes.node
-}; 
 
 export default Header;

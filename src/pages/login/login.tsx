@@ -1,35 +1,37 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import { AnyAction } from 'redux';
 import { Link } from 'react-router-dom';
-import { EmailInput, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components'
-import { setRegisterFormValue } from '../../services/actions/form-register';
+import { EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
+import { setLoginFormValue } from '../../services/actions/form-login';
 import Form from '../../components/form';
 import Header from '../../components/form/header';
 import FormButton from '../../components/form/button';
 import Footer from '../../components/form/footer';
-import { registerUser, CLOSE_ERROR } from '../../services/actions/user';
+import { loginUser, CLOSE_ERROR } from '../../services/actions/user';
 import Modal from '../../components/modal/modal';
 
 
-function RegisterPage() {
+function LoginPage() {
+  //@ts-ignore
   const getStateUserData = (state) => state.userData;
-  const getStateRegisterForm = (state) => state.registerForm.form;
-  const { name, email, password } = useSelector(getStateRegisterForm);
+  //@ts-ignore
+  const getStateLoginForm = (state) => state.loginForm.form;
+  const { email, password } = useSelector(getStateLoginForm);
   const { failed, message } = useSelector(getStateUserData);
 
   const dispatch = useDispatch();
 
-  const onFormChange = (e) => {
-    dispatch(setRegisterFormValue(e.target.name, e.target.value))
+  const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setLoginFormValue(e.target.name, e.target.value))
   };
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(registerUser({
-      name: name,
+    dispatch(loginUser({
       email: email,
       password: password
-    }))
+    }) as unknown as AnyAction);
   };
 
   const handleCloseModal = () => {
@@ -48,14 +50,7 @@ function RegisterPage() {
   return (
     <>
       <Form onSubmitHandler={onSubmitHandler}>
-        <Header>Регистрация</Header>
-        <Input
-          onChange={onFormChange}
-          value={name}
-          name={'name'}
-          placeholder="Имя"
-          extraClass="pt-6"
-        />
+        <Header>Вход</Header>
         <EmailInput
           onChange={onFormChange}
           value={email}
@@ -69,11 +64,15 @@ function RegisterPage() {
           name={'password'}
           extraClass="pt-6"
         />
-        <FormButton caption='Зарегистрироваться'/>
+        <FormButton caption='Войти'/>
         <Footer>
           <div>
-            <span>Уже зарегистрированы? </span>
-            <Link to={{ pathname: `/login` }}>Войти</Link>
+            <span>Вы новый пользователь? </span>
+            <Link to={{ pathname: `/register` }}>Зарегистрироваться</Link>
+          </div>
+          <div className={`pt-6`}>
+            <span>Забыли пароль? </span>
+            <Link to={{ pathname: `/forgot-password` }}>Восстановить</Link>
           </div>
         </Footer>
       </Form>
@@ -87,4 +86,4 @@ function RegisterPage() {
   );
 }
 
-export default RegisterPage;
+export default LoginPage;
