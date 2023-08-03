@@ -1,4 +1,4 @@
-import { TAuthRequest, TAuthResponse, TForgotPasswordRequest, TForgotPasswordResponse, TIngredientsResponse, TLogoutResponse, TRefreshTokenResponse, TRegistrRequest, TRegistrResponse, TResetPasswordRequest, TResetPasswordResponse, TUpdateUserRequest } from "./types";
+import { TAuthRequest, TAuthResponse, TForgotPasswordRequest, TForgotPasswordResponse, TIngredientsResponse, TLogoutResponse, TOrderResponse, TRefreshTokenResponse, TRegistrRequest, TRegistrResponse, TResetPasswordRequest, TResetPasswordResponse, TUpdateUserRequest, TUpdateUserResponse } from "./types";
 
 const BURGER_API_URL = 'https://norma.nomoreparties.space/api'
 
@@ -27,7 +27,7 @@ export const refreshToken = (): Promise<TRefreshTokenResponse> => {
   }).then(checkResponse<TRefreshTokenResponse>);
 };
 
-export const fetchWithRefresh = async (url: string, options: TOptions) => {
+export const fetchWithRefresh = async <T>(url: string, options: TOptions): Promise<T> => {
   try {
     const res = await fetch(url, options);
     return await checkResponse(res);
@@ -124,7 +124,7 @@ export const resetPassword = (data: TResetPasswordRequest) => {
 };
 
 export const getUserFetch = () => {
-  return fetchWithRefresh(`${BURGER_API_URL}/auth/user`, {
+  return fetchWithRefresh<TUpdateUserResponse>(`${BURGER_API_URL}/auth/user`, {
     headers: {
       authorization: localStorage.getItem("accessToken")!
     }
@@ -132,7 +132,7 @@ export const getUserFetch = () => {
 };
 
 export const updateUserFetch = (user: TUpdateUserRequest) => {
-  return fetchWithRefresh(`${BURGER_API_URL}/auth/user`, {
+  return fetchWithRefresh<TUpdateUserResponse>(`${BURGER_API_URL}/auth/user`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -152,7 +152,7 @@ export const getIngredientsFetch = () => {
 };
 
 export const orderBurgerFetch = (ingrediensIds: string[]) => {
-  return fetchWithRefresh(`${BURGER_API_URL}/orders`, {
+  return fetchWithRefresh<TOrderResponse>(`${BURGER_API_URL}/orders`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',

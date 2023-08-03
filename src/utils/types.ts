@@ -1,4 +1,14 @@
 import { Identifier } from "dnd-core"
+import { TBurgerConstructorActions } from "../services/actions/burger-constructor"
+import { TBurgerIngredientsActions } from "../services/actions/burger-ingredients"
+import { IForgotPasswordFormValueAction } from "../services/actions/form-forgot-password"
+import { ILoginFormValueAction } from "../services/actions/form-login"
+import { IRegisterFormValueAction } from "../services/actions/form-register"
+import { IResetPasswordFormValueAction } from "../services/actions/form-reset-password"
+import { TOrderDetailsActions } from "../services/actions/order-details"
+import { TUserActions } from "../services/actions/user"
+import type { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { store } from "../"
 
 export type TIngredient = {
   _id: string,
@@ -132,4 +142,23 @@ export type TOrderResponse = {
     number: number
   },
   success: boolean
-} 
+}
+
+export type TOrderInfo = {
+  number: number
+}
+
+
+// state types
+type TApplicationActions = 
+  | TBurgerConstructorActions
+  | TBurgerIngredientsActions
+  | IForgotPasswordFormValueAction
+  | ILoginFormValueAction
+  | IRegisterFormValueAction
+  | IResetPasswordFormValueAction
+  | TOrderDetailsActions
+  | TUserActions;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = ThunkDispatch<RootState, unknown, TApplicationActions>;
+export type AppThunkAction<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, TApplicationActions>;

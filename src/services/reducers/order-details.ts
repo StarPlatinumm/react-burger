@@ -1,3 +1,5 @@
+import { TOrderInfo } from "../../utils/types";
+import { TOrderDetailsActions } from '../actions/order-details';
 import {
   GET_ORDER_DETAILS_LOADING,
   GET_ORDER_DETAILS_SUCCESS,
@@ -5,13 +7,19 @@ import {
   ORDER_DETAILS_CLOSE
 } from "../actions/order-details";
 
+export type TOrderDetailsState = {
+  isLoading: boolean,
+  failed: boolean | null,
+  orderDetails: TOrderInfo
+};
+
 const orderDetailsInitialState = {
   isLoading: false,
   failed: null,
   orderDetails: null
 };
 
-export const orderDetailsReducer = (state = orderDetailsInitialState, action) => {
+export const orderDetailsReducer = (state = orderDetailsInitialState, action: TOrderDetailsActions) => {
   switch (action.type) {
     case GET_ORDER_DETAILS_LOADING: {
       return {
