@@ -24,7 +24,7 @@ function AppHeader() {
           </NavLink>
 
           <NavLink
-            to={{ pathname: `/x` }}
+            to={{ pathname: `/feed` }}
             className={({ isActive }) => (
               isActive ? (
                 `${appHeaderStyles['active-link']}`

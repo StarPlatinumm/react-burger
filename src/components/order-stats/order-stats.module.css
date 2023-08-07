@@ -1,0 +1,29 @@
+.order-stats-ready-and-in-process {
+  grid-column-gap: 36px;
+  grid-row-gap: 24px;
+  -webkit-column-gap: 36px;
+  column-gap: 36px;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  row-gap: 24px;
+}
+
+.order-stats-orders-list {
+  grid-gap: 8px;
+  display: grid;
+  flex-wrap: nowrap;
+  gap: 8px;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(10,1fr);
+  height: 154px;
+  overflow-x: auto;
+  list-style: none;
+}
+
+.cyan-color {
+  color: #0cc;
+}
+
+.glowing {
+  text-shadow: 0 0 50px var(--colors-interface-accent);
+}

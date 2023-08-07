@@ -9,7 +9,7 @@ import {
 export type TIngredientsState = {
   isLoading: boolean;
   failed: boolean | null;
-  ingredients: ReadonlyArray<TIngredient>
+  ingredients: Array<TIngredient>
 };
 
 const ingredientsInitialState: TIngredientsState = {

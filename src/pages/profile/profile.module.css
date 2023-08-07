@@ -18,10 +18,12 @@
   align-items: center;
   min-height: 64px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .menu-item-active {
   color: #fff;
+  text-decoration: none;
 }
 
 .menu-footer {

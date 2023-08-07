@@ -1,4 +1,5 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useSelector } from '../..';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -12,9 +13,7 @@ import Modal from '../../components/modal/modal';
 
 
 function ForgotPasswordPage() {
-  //@ts-ignore
-  const getStateForgotPasswordForm = (state) => state.forgotPasswordForm.form;
-  const { email } = useSelector(getStateForgotPasswordForm);
+  const { email } = useSelector((state) => state.forgotPasswordForm.form);
 
   const dispatch = useDispatch();
 

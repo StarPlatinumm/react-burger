@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 
 type TProps = {
-  header: string | null,
+  header: string | null | undefined,
   onClose: () => void,
   children: ReactNode
 }

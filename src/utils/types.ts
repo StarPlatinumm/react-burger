@@ -8,7 +8,7 @@ import { IResetPasswordFormValueAction } from "../services/actions/form-reset-pa
 import { TOrderDetailsActions } from "../services/actions/order-details"
 import { TUserActions } from "../services/actions/user"
 import type { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { store } from "../"
+import { rootReducer } from "../services/reducers"
 
 export type TIngredient = {
   _id: string,
@@ -24,6 +24,8 @@ export type TIngredient = {
   image_mobile: string,
   image_large: string,
   __v: number,
+  overlayText?: string,
+  quantity?: number,
 }
 
 export type TDrugConstructorElement = {
@@ -148,9 +150,34 @@ export type TOrderInfo = {
   number: number
 }
 
+// feed
+export type TOrder = {
+  ingredients: string[],
+  fixedIngredients?: (TIngredient)[],
+  _id: string,
+  status: string,
+  name: string,
+  number: number,
+  createdAt: string,
+  updatedAt: string
+  total?: number
+}
+
+export type TOrdersResponse = {
+  success: boolean,
+  orders: TOrder[],
+  total: number,
+  totalToday: number
+}
+
+export type TOrdersResponseFromAPI = {
+  success: boolean,
+  orders: TOrder[]
+}
+
 
 // state types
-type TApplicationActions = 
+export type TAppActions = 
   | TBurgerConstructorActions
   | TBurgerIngredientsActions
   | IForgotPasswordFormValueAction
@@ -159,6 +186,7 @@ type TApplicationActions =
   | IResetPasswordFormValueAction
   | TOrderDetailsActions
   | TUserActions;
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = ThunkDispatch<RootState, unknown, TApplicationActions>;
-export type AppThunkAction<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, TApplicationActions>;
+
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = ThunkDispatch<RootState, unknown, TAppActions>;
+export type AppThunkAction<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, TAppActions>;

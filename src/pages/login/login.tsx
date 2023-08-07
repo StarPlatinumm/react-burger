@@ -1,4 +1,5 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useSelector } from '../..';
 import { useEffect } from 'react';
 import { AnyAction } from 'redux';
 import { Link } from 'react-router-dom';
@@ -13,12 +14,8 @@ import Modal from '../../components/modal/modal';
 
 
 function LoginPage() {
-  //@ts-ignore
-  const getStateUserData = (state) => state.userData;
-  //@ts-ignore
-  const getStateLoginForm = (state) => state.loginForm.form;
-  const { email, password } = useSelector(getStateLoginForm);
-  const { failed, message } = useSelector(getStateUserData);
+  const { email, password } = useSelector((state) => state.loginForm.form);
+  const { failed, message } = useSelector((state) => state.userData);
 
   const dispatch = useDispatch();
 

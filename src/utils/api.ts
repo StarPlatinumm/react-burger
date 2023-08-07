@@ -1,4 +1,4 @@
-import { TAuthRequest, TAuthResponse, TForgotPasswordRequest, TForgotPasswordResponse, TIngredientsResponse, TLogoutResponse, TOrderResponse, TRefreshTokenResponse, TRegistrRequest, TRegistrResponse, TResetPasswordRequest, TResetPasswordResponse, TUpdateUserRequest, TUpdateUserResponse } from "./types";
+import { TAuthRequest, TAuthResponse, TForgotPasswordRequest, TForgotPasswordResponse, TIngredientsResponse, TLogoutResponse, TOrderResponse, TOrdersResponseFromAPI, TRefreshTokenResponse, TRegistrRequest, TRegistrResponse, TResetPasswordRequest, TResetPasswordResponse, TUpdateUserRequest, TUpdateUserResponse } from "./types";
 
 const BURGER_API_URL = 'https://norma.nomoreparties.space/api'
 
@@ -164,6 +164,15 @@ export const orderBurgerFetch = (ingrediensIds: string[]) => {
   })
     .then((data) => {
       if (data && typeof data === 'object' && 'success' in data && data.success) return data;
+      return Promise.reject(data);
+    });
+};
+
+export const getOrderFetch = (orderNumber: string) => {
+  return fetch(`${BURGER_API_URL}/orders/${orderNumber}`)
+    .then(checkResponse<TOrdersResponseFromAPI>)
+    .then((data) => {
+      if (data?.success) return data.orders[0];
       return Promise.reject(data);
     });
 };

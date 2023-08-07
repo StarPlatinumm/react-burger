@@ -1,4 +1,5 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useSelector } from '../..';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { EmailInput, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -13,12 +14,8 @@ import { AnyAction } from 'redux';
 
 
 function RegisterPage() {
-  //@ts-ignore
-  const getStateUserData = (state) => state.userData;
-  //@ts-ignore
-  const getStateRegisterForm = (state) => state.registerForm.form;
-  const { name, email, password } = useSelector(getStateRegisterForm);
-  const { failed, message } = useSelector(getStateUserData);
+  const { name, email, password } = useSelector((state) => state.registerForm.form);
+  const { failed, message } = useSelector((state) => state.userData);
 
   const dispatch = useDispatch();
 
