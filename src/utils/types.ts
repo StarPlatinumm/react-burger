@@ -7,6 +7,7 @@ import { IRegisterFormValueAction } from "../services/actions/form-register"
 import { IResetPasswordFormValueAction } from "../services/actions/form-reset-password"
 import { TOrderDetailsActions } from "../services/actions/order-details"
 import { TUserActions } from "../services/actions/user"
+import { TOrderFeedActions  } from "../services/actions/web-socket"
 import type { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { rootReducer } from "../services/reducers"
 
@@ -185,7 +186,8 @@ export type TAppActions =
   | IRegisterFormValueAction
   | IResetPasswordFormValueAction
   | TOrderDetailsActions
-  | TUserActions;
+  | TUserActions
+  | TOrderFeedActions;
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = ThunkDispatch<RootState, unknown, TAppActions>;

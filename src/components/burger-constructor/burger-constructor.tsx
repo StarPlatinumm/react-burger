@@ -6,8 +6,7 @@ import DragConstructorElement from '../constructor-element/drug-constructor-elem
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import { getOrderDetails, ORDER_DETAILS_CLOSE } from '../../services/actions/order-details';
-import { useDispatch } from 'react-redux';
-import { useSelector } from '../..';
+import { useSelector, useDispatch } from '../..';
 import { useDrop } from "react-dnd";
 import { ADD_INGREDIENT, MOVE_INGREDIENT, CLEAR_INGREDIENTS } from '../../services/actions/burger-constructor';
 import { useNavigate } from 'react-router-dom';

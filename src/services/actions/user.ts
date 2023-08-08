@@ -5,7 +5,7 @@ import {
   getUserFetch,
   updateUserFetch,
 } from "../../utils/api";
-import { TAuthRequest, TAuthResponse, TLogoutResponse, TRegistrRequest, TRegistrResponse, TUpdateUserResponse } from "../../utils/types";
+import { AppThunkAction, TAuthRequest, TAuthResponse, TLogoutResponse, TRegistrRequest, TRegistrResponse, TUpdateUserResponse } from "../../utils/types";
 
 export const LOGIN_USER: 'LOGIN_USER' = 'LOGIN_USER';
 export const LOGOUT_USER: 'LOGOUT_USER' = 'LOGOUT_USER';
@@ -70,8 +70,8 @@ export type TUserActions =
   | IUserRequestFailedAction
   | ICloseErrorAction;
 
-export const checkUserAuth = () => {
-  return (dispatch: any) => {
+export const checkUserAuth = (): AppThunkAction => {
+  return (dispatch) => {
     if (localStorage.getItem("accessToken")) {
       dispatch(getUserData());
     }
@@ -79,8 +79,8 @@ export const checkUserAuth = () => {
   };
 };
 
-export function loginUser(data: TAuthRequest) {
-  return function (dispatch: any) {
+export function loginUser(data: TAuthRequest): AppThunkAction {
+  return function (dispatch) {
     dispatch({
       type: USER_REQUEST_LOADING
     });
@@ -105,8 +105,8 @@ export function loginUser(data: TAuthRequest) {
   };
 }
 
-export function logoutUser() {
-  return function (dispatch: any) {
+export function logoutUser(): AppThunkAction {
+  return function (dispatch) {
     dispatch({
       type: USER_REQUEST_LOADING
     });
@@ -129,8 +129,8 @@ export function logoutUser() {
   };
 }
 
-export function registerUser(data: TRegistrRequest) {
-  return function (dispatch: any) {
+export function registerUser(data: TRegistrRequest): AppThunkAction {
+  return function (dispatch) {
     dispatch({
       type: USER_REQUEST_LOADING
     });
@@ -155,8 +155,8 @@ export function registerUser(data: TRegistrRequest) {
   };
 }
 
-export function getUserData() {
-  return function (dispatch: any) {
+export function getUserData(): AppThunkAction {
+  return function (dispatch) {
     dispatch({
       type: USER_REQUEST_LOADING
     });
@@ -183,8 +183,8 @@ export function getUserData() {
   };
 }
 
-export function updateUserData(data: TRegistrRequest) {
-  return function (dispatch: any) {
+export function updateUserData(data: TRegistrRequest): AppThunkAction {
+  return function (dispatch) {
     dispatch({
       type: USER_REQUEST_LOADING
     });

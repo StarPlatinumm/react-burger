@@ -12,7 +12,7 @@ import IngredientDetailsPage from '../../pages/ingredient-details/ingredient-det
 import Modal from '../modal/modal';
 import { getIngredients } from '../../services/actions/burger-ingredients';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../..';
 import { OnlyAuth, OnlyUnAuth } from '../protected-route/protected-route';
 import { checkUserAuth } from '../../services/actions/user';
 import { AnyAction } from 'redux';

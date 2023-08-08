@@ -1,6 +1,6 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import drugElementStyles from './drug-constructor-element.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../..';
 import { REMOVE_INGREDIENT } from '../../services/actions/burger-constructor';
 import { useDrop, useDrag } from "react-dnd";
 import { useRef } from 'react';
@@ -13,7 +13,7 @@ function DragConstructorElement(props: TDrugConstructorElement) {
   const handleClose = () => {
     dispatch({
       type: REMOVE_INGREDIENT,
-      key: props.id
+      key: props.id!
     });
   }
   const ref = useRef<HTMLDivElement>(null)

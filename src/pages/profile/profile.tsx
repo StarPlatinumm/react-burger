@@ -1,13 +1,11 @@
 import profileStyles from './profile.module.css'
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from '../..';
+import { useSelector, useDispatch } from '../..';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import Form from '../../components/form';
 import FormButton from '../../components/form/button';
-import { logoutUserFetch } from '../../utils/api';
-import { LOGOUT_USER } from '../../services/actions/user';
+import { logoutUser } from '../../services/actions/user';
 import { updateUserData } from '../../services/actions/user';
 import { AnyAction } from 'redux';
 import OrdersFeedComponent from '../../components/orders-feed/orders-feed';
@@ -30,12 +28,8 @@ function ProfilePage() {
   const location = useLocation();
 
   const onLogoutHandler = () => {
-    logoutUserFetch()
-      .then((data) => {
-        dispatch({ type: LOGOUT_USER });
-        navigate('/login');
-      })
-      .catch();
+    logoutUser();
+    navigate('/login');
   }
 
   const onSubmitHandler = (e: React.SyntheticEvent<HTMLFormElement>) => {

@@ -1,5 +1,4 @@
-import { useDispatch } from 'react-redux';
-import { useSelector } from '../..';
+import { useSelector, useDispatch } from '../..';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components'

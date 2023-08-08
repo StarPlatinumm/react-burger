@@ -1,5 +1,4 @@
-import { useDispatch } from 'react-redux';
-import { useSelector } from '../..';
+import { useSelector, useDispatch } from '../..';
 import { useEffect } from 'react';
 import { AnyAction } from 'redux';
 import { Link } from 'react-router-dom';
