@@ -8,8 +8,7 @@ import FormButton from '../../components/form/button';
 import { logoutUser } from '../../services/actions/user';
 import { updateUserData } from '../../services/actions/user';
 import { AnyAction } from 'redux';
-import OrdersFeedComponent from '../../components/orders-feed/orders-feed';
-import { connect as connectFeed, disconnect as disconnectFeed} from '../../services/actions/web-socket';
+import OrdersFeedListPage from '../orders-feed-list/orders-feed-list';
 
 
 function ProfilePage() {
@@ -57,17 +56,6 @@ function ProfilePage() {
     },
     []
   );
-
-  const { ordersData } = useSelector((state) => state.wsFeed);
-
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken")!.replace('Bearer ', '');
-    dispatch(connectFeed(`wss://norma.nomoreparties.space/orders?token=${accessToken}`));
-
-    return () => {
-      dispatch(disconnectFeed());
-    };
-  }, []);
 
   const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsDataChanged(true);
@@ -161,8 +149,8 @@ function ProfilePage() {
           }
         </Form>
         }
-        {location.pathname === '/profile/orders' && ordersData &&
-          <OrdersFeedComponent ordersData={ordersData}/>
+        {location.pathname === '/profile/orders' &&
+          <OrdersFeedListPage />
         }
       </div>
     </div>
