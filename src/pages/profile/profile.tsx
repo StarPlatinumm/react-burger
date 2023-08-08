@@ -68,11 +68,9 @@ function ProfilePage() {
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken")!.replace('Bearer ', '');
-    console.log(`wss://norma.nomoreparties.space/orders/?token=${accessToken}`);
-    dispatch(connectFeed(`wss://norma.nomoreparties.space/orders/?token=${accessToken}`));
+    dispatch(connectFeed(`wss://norma.nomoreparties.space/orders?token=${accessToken}`));
 
     return () => {
-      console.log(`DISCONNECTED!!!!!!`);
       dispatch(disconnectFeed());
     };
   }, []);
