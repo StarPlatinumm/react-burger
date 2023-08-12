@@ -1,4 +1,15 @@
 import { Identifier } from "dnd-core"
+import { TBurgerConstructorActions } from "../services/actions/burger-constructor"
+import { TBurgerIngredientsActions } from "../services/actions/burger-ingredients"
+import { IForgotPasswordFormValueAction } from "../services/actions/form-forgot-password"
+import { ILoginFormValueAction } from "../services/actions/form-login"
+import { IRegisterFormValueAction } from "../services/actions/form-register"
+import { IResetPasswordFormValueAction } from "../services/actions/form-reset-password"
+import { TOrderDetailsActions } from "../services/actions/order-details"
+import { TUserActions } from "../services/actions/user"
+import { TOrderFeedActions  } from "../services/actions/web-socket"
+import type { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { rootReducer } from "../services/reducers"
 
 export type TIngredient = {
   _id: string,
@@ -14,6 +25,8 @@ export type TIngredient = {
   image_mobile: string,
   image_large: string,
   __v: number,
+  overlayText?: string,
+  quantity?: number,
 }
 
 export type TDrugConstructorElement = {
@@ -132,4 +145,50 @@ export type TOrderResponse = {
     number: number
   },
   success: boolean
-} 
+}
+
+export type TOrderInfo = {
+  number: number
+}
+
+// feed
+export type TOrder = {
+  ingredients: string[],
+  fixedIngredients?: (TIngredient)[],
+  _id: string,
+  status: string,
+  name: string,
+  number: number,
+  createdAt: string,
+  updatedAt: string
+  total?: number
+}
+
+export type TOrdersResponse = {
+  success: boolean,
+  orders: TOrder[],
+  total: number,
+  totalToday: number
+}
+
+export type TOrdersResponseFromAPI = {
+  success: boolean,
+  orders: TOrder[]
+}
+
+
+// state types
+export type TAppActions = 
+  | TBurgerConstructorActions
+  | TBurgerIngredientsActions
+  | IForgotPasswordFormValueAction
+  | ILoginFormValueAction
+  | IRegisterFormValueAction
+  | IResetPasswordFormValueAction
+  | TOrderDetailsActions
+  | TUserActions
+  | TOrderFeedActions;
+
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = ThunkDispatch<RootState, unknown, TAppActions>;
+export type AppThunkAction<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, TAppActions>;

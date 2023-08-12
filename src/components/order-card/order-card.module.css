@@ -1,0 +1,72 @@
+.order-card-container {
+  border-radius: 40px;
+  box-shadow: 0 4px 8px rgba(0,0,0,.04), 0 0 2px rgba(0,0,0,.06), 0 0 1px rgba(0,0,0,.04);
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  transition: var(--common-transition);
+  background: #1c1c21;
+}
+
+.order-card-number-and-date {
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-card-title {
+  text-align: start;
+}
+
+.order-card-ingredients-container {
+  align-items: center;
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+.order-card-ingredients-ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.order-card-total-price-container {
+  display: flex;
+  gap: 9px;
+}
+
+.order-card-round-icon-img {
+  background: #131316;
+  border: 2px solid #801ab2;
+  border-radius: 100%;
+  height: 64px;
+  object-fit: cover;
+  position: relative;
+  width: 64px;
+}
+
+.last-item {
+  opacity: 0.5;
+}
+
+.remaining-ingredients {
+  text-shadow: 1px 1px 1px black;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+}
+
+.date-color {
+  color: var(--text-inactive-color);
+}
+
+.no-decoration {
+  text-decoration: none;
+  color: #fff
+}
+
+.cyan-color {
+  color: #0cc;
+}

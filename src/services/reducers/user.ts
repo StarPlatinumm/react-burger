@@ -7,10 +7,21 @@ import {
     USER_REQUEST_LOADING,
     USER_REQUEST_FAILED,
     CLOSE_ERROR,
-    SET_AUTH_CHECKED
+    SET_AUTH_CHECKED,
+    TUserActions
   } from "../actions/user";
+
+  export type TUserState = {
+    isLoading: boolean,
+    failed: boolean,
+    isAuthChecked: boolean,
+    message: string,
+    name: string,
+    email: string,
+    password: string,
+  };
   
-  const userInitialState = {
+  const userInitialState: TUserState = {
     isLoading: false,
     failed: false,
     isAuthChecked: false,
@@ -20,7 +31,7 @@ import {
     password: '',
   };
   
-  export const userDataReducer = (state = userInitialState, action) => {
+  export const userDataReducer = (state = userInitialState, action: TUserActions) => {
     switch (action.type) {
       case USER_REQUEST_LOADING: {
         return {

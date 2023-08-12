@@ -12,10 +12,12 @@ import IngredientDetailsPage from '../../pages/ingredient-details/ingredient-det
 import Modal from '../modal/modal';
 import { getIngredients } from '../../services/actions/burger-ingredients';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../..';
 import { OnlyAuth, OnlyUnAuth } from '../protected-route/protected-route';
 import { checkUserAuth } from '../../services/actions/user';
 import { AnyAction } from 'redux';
+import OrdersFeed from '../../pages/orders-feed/orders-feed';
+import OrderCardDetailsPage from '../../pages/order-card-details/order-card-details';
 
 
 function App() {
@@ -39,18 +41,24 @@ function App() {
         <Routes location={state?.backgroundLocation || location}>
           <Route path="*" element={<NotFound404Page />} />
           <Route path="/" element={<MainPage />} />
-          <Route path="/ingredients/:id" element={<IngredientDetailsPage />} />
+          <Route path="/ingredients/:id" element={<IngredientDetailsPage isModal={false} />} />
           <Route path="/login" element={<OnlyUnAuth component={<LoginPage />}/>} />
           <Route path="/register" element={<OnlyUnAuth component={<RegisterPage />}/>} />
           <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPasswordPage />}/>} />
           <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPasswordPage />}/>} />
           <Route path="/profile" element={<OnlyAuth component={<ProfilePage />}/>} />
+          <Route path="/profile/orders" element={<OnlyAuth component={<ProfilePage />}/>} />
+          <Route path="/feed" element={<OrdersFeed />} />
+          <Route path="/feed/:number" element={<OrderCardDetailsPage isModal={false} />} />
         </Routes>
 
         {state?.backgroundLocation && (
           <Routes>
             <Route path="/ingredients/:id" element={
               <Modal header="Детали ингредиента" onClose={() => navigate(-1)}><IngredientDetailsPage isModal={true}/></Modal>
+            } />
+            <Route path="/feed/:number" element={
+              <Modal header={state.orderNumber} onClose={() => navigate(-1)}><OrderCardDetailsPage isModal={true}/></Modal>
             } />
           </Routes>
         )}

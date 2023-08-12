@@ -1,11 +1,9 @@
 import { ReactElement } from "react";
-import { useSelector } from "react-redux";
+import { useSelector } from "../..";
 import { Navigate, useLocation } from "react-router-dom";
 
 const Protected = ({ onlyUnAuth = false, component }: { onlyUnAuth?: boolean, component: ReactElement }): ReactElement | null => {
-  //@ts-ignore
-  const getStateUserData = (state) => state.userData;
-  const {isAuthChecked, name} = useSelector(getStateUserData);
+  const {isAuthChecked, name} = useSelector((state) => state.userData);
   const location = useLocation();
   const from = location.state?.from || '/';
 

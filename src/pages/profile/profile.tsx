@@ -1,20 +1,18 @@
 import profileStyles from './profile.module.css'
 import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from '../..';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import Form from '../../components/form';
 import FormButton from '../../components/form/button';
-import { logoutUserFetch } from '../../utils/api';
-import { LOGOUT_USER } from '../../services/actions/user';
+import { logoutUser } from '../../services/actions/user';
 import { updateUserData } from '../../services/actions/user';
 import { AnyAction } from 'redux';
+import OrdersFeedListPage from '../orders-feed-list/orders-feed-list';
 
 
 function ProfilePage() {
-  //@ts-ignore
-  const getStateUserData = (state) => state.userData;
-  const { name, email } = useSelector(getStateUserData);
+  const { name, email } = useSelector((state) => state.userData);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -26,14 +24,11 @@ function ProfilePage() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const onLogoutHandler = () => {
-    logoutUserFetch()
-      .then((data) => {
-        dispatch({ type: LOGOUT_USER });
-        navigate('/login');
-      })
-      .catch();
+    logoutUser();
+    navigate('/login');
   }
 
   const onSubmitHandler = (e: React.SyntheticEvent<HTMLFormElement>) => {
@@ -73,21 +68,57 @@ function ProfilePage() {
   return (
     <div className={`${profileStyles['profile-page']} pt-25`}>
       <ul className={`${profileStyles['menu']} text_color_inactive`}>
-        <li className={`${profileStyles['menu-item']} ${profileStyles['menu-item-active']}`}>
-          <span>Профиль</span>
-        </li>
-        <li className={`${profileStyles['menu-item']}`}>
-          <span>История заказов</span>
-        </li>
+
+        <NavLink
+          to={{ pathname: `/profile` }}
+          className={() => (
+            location.pathname === '/profile' ? (
+              `${profileStyles['menu-item-active']}`
+            ) : (
+              `${profileStyles['menu-item']} text_color_inactive`
+            ))}
+        >
+          <li className={`${profileStyles['menu-item']}`}>
+            <span>Профиль</span>
+          </li>
+        </NavLink>
+
+        <NavLink
+          to={{ pathname: `/profile/orders` }}
+          className={() => (
+            location.pathname === '/profile/orders' ? (
+              `${profileStyles['menu-item-active']}`
+            ) : (
+              `${profileStyles['menu-item']} text_color_inactive`
+            ))}
+        >
+          <li className={`${profileStyles['menu-item']}`}>
+            <span>История заказов</span>
+          </li>
+        </NavLink>
+        
         <li className={`${profileStyles['menu-item']}`} onClick={onLogoutHandler}>
           <span>Выход</span>
         </li>
+
         <li className={`${profileStyles['menu-item']}`}></li>
-        <li className={`${profileStyles['menu-item']} ${profileStyles['menu-footer']} pr-10`}>
-          <span>В этом разделе вы можете изменить свои персональные данные</span>
-        </li>
+
+        {
+          location.pathname === '/profile' &&
+          <li className={`${profileStyles['menu-item']} ${profileStyles['menu-footer']} pr-10`}>
+            <span>В этом разделе вы можете изменить свои персональные данные</span>
+          </li>
+        }
+        {
+          location.pathname === '/profile/orders' &&
+          <li className={`${profileStyles['menu-item']} ${profileStyles['menu-footer']} pr-10`}>
+            <span>В этом разделе вы можете посмотреть свою историю заказов</span>
+          </li>
+        }
+
       </ul>
       <div>
+        {location.pathname === '/profile' &&
         <Form onSubmitHandler={onSubmitHandler}>
           <Input
             value={formData.name}
@@ -117,6 +148,10 @@ function ProfilePage() {
             </div>
           }
         </Form>
+        }
+        {location.pathname === '/profile/orders' &&
+          <OrdersFeedListPage />
+        }
       </div>
     </div>
   );

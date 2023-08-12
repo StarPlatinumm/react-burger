@@ -1,7 +1,7 @@
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ingredientCardStyles from './ingredient-card.module.css';
 import { useDrag } from "react-dnd";
-import { useSelector } from 'react-redux';
+import { useSelector } from '../..';
 import { useCallback } from 'react';
 import { Link, Location } from 'react-router-dom';
 import { TIngredient } from '../../utils/types';
@@ -17,10 +17,7 @@ function IngredientCard(props: TProps) {
     item: props.ingredient
   });
 
-  //@ts-ignore
-  const getStateBurgerConstructor = (state) => state.burgerConstructor;
-
-  const { bun, ingredients } = useSelector(getStateBurgerConstructor);
+  const { bun, ingredients } = useSelector((state) => state.burgerConstructor);
 
   const countIngredients = useCallback(() => {
     if (props.ingredient.type === 'bun') {

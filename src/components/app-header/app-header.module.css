@@ -1,3 +1,7 @@
+.header {
+  background-color: #1c1c21;
+}
+
 .menu-list {
   display: grid;
   align-items: center;

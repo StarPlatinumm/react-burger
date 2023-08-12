@@ -1,16 +1,23 @@
+import { TIngredient } from '../../utils/types';
 import {
   ADD_INGREDIENT,
   MOVE_INGREDIENT,
   REMOVE_INGREDIENT,
-  CLEAR_INGREDIENTS
+  CLEAR_INGREDIENTS,
+  TBurgerConstructorActions
 } from '../actions/burger-constructor';
 
-const constructorInitialState = {
+export type TConstructorState = {
+  bun: TIngredient | null;
+  ingredients: ReadonlyArray<TIngredient>
+};
+
+const constructorInitialState: TConstructorState = {
   bun: null,
   ingredients: []
 };
 
-export const constructorReducer = (state = constructorInitialState, action) => {
+export const constructorReducer = (state = constructorInitialState, action: TBurgerConstructorActions) => {
   switch (action.type) {
     case ADD_INGREDIENT: {
       if (action.ingredient.type === 'bun') {
@@ -43,7 +50,7 @@ export const constructorReducer = (state = constructorInitialState, action) => {
     case REMOVE_INGREDIENT: {
       return {
         ...state,
-        ingredients: state.ingredients.filter(item => item.key !== action.key)
+        ingredients: state.ingredients.filter((item: TIngredient) => item.key !== action.key)
       };
     }
     case CLEAR_INGREDIENTS: {

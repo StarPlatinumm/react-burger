@@ -6,7 +6,7 @@ import DragConstructorElement from '../constructor-element/drug-constructor-elem
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import { getOrderDetails, ORDER_DETAILS_CLOSE } from '../../services/actions/order-details';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from '../..';
 import { useDrop } from "react-dnd";
 import { ADD_INGREDIENT, MOVE_INGREDIENT, CLEAR_INGREDIENTS } from '../../services/actions/burger-constructor';
 import { useNavigate } from 'react-router-dom';
@@ -16,16 +16,10 @@ import { TIngredient } from '../../utils/types';
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
-  //@ts-ignore
-  const getStateOrderDetails = (state) => state.orderDetails;
-  //@ts-ignore
-  const getStateBurgerConstructor = (state) => state.burgerConstructor;
-  //@ts-ignore
-  const getStateUserData = (state) => state.userData;
   
-  const { orderDetails, failed, isLoading } = useSelector(getStateOrderDetails);
-  const { bun, ingredients } = useSelector(getStateBurgerConstructor);
-  const { name } = useSelector(getStateUserData);
+  const { orderDetails, failed, isLoading } = useSelector((state) => state.orderDetails);
+  const { bun, ingredients } = useSelector((state) => state.burgerConstructor);
+  const { name } = useSelector((state) => state.userData);
 
   let navigate = useNavigate();
 
@@ -33,7 +27,7 @@ function BurgerConstructor() {
     if (name === '') {
       navigate('/login');
     } else {
-      dispatch(getOrderDetails([bun?._id, bun?._id, ...ingredients.map((item: TIngredient) => item._id)]) as unknown as AnyAction);
+      dispatch(getOrderDetails([bun?._id ?? '', bun?._id ?? '', ...ingredients.map((item: TIngredient) => item._id)]) as unknown as AnyAction);
       dispatch({ type: CLEAR_INGREDIENTS});
     }
   };

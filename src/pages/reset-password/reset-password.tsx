@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../..';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -12,9 +12,7 @@ import Modal from '../../components/modal/modal';
 
 
 function ResetPasswordPage() {
-  //@ts-ignore
-  const getStateResetPasswordForm = (state) => state.resetPasswordForm.form;
-  const { newPassword, code } = useSelector(getStateResetPasswordForm);
+  const { newPassword, code } = useSelector((state) => state.resetPasswordForm.form);
 
   const dispatch = useDispatch();
 
