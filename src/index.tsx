@@ -16,13 +16,13 @@ import {
 } from "react-redux";
 import { socketMiddleware } from './services/middleware/socket-middleware';
 import { 
-  connect as LiveTableWsConnect, 
-  disconnect as LiveTableWsDisconnect,
-  wsConnecting as LiveTableWsConnecting,
-  wsOpen as LiveTableWsOpen,
-  wsClose as LiveTableWsClose,
-  wsMessage as LiveTableWsNessage,
-  wsError as LiveTableWsError 
+  connect as OrderFeedWsConnect, 
+  disconnect as OrderFeedWsDisconnect,
+  wsConnecting as OrderFeedWsConnecting,
+  wsOpen as OrderFeedWsOpen,
+  wsClose as OrderFeedWsClose,
+  wsMessage as OrderFeedWsNessage,
+  wsError as OrderFeedWsError 
 } from './services/actions/web-socket';
 
 declare global {
@@ -32,13 +32,13 @@ declare global {
 }
 
 const wsActions = {
-  wsConnect: LiveTableWsConnect,
-  wsDisconnect: LiveTableWsDisconnect,
-  wsConnecting: LiveTableWsConnecting,
-  onOpen: LiveTableWsOpen,
-  onClose: LiveTableWsClose,
-  onError: LiveTableWsError,
-  onMessage: LiveTableWsNessage,
+  wsConnect: OrderFeedWsConnect,
+  wsDisconnect: OrderFeedWsDisconnect,
+  wsConnecting: OrderFeedWsConnecting,
+  onOpen: OrderFeedWsOpen,
+  onClose: OrderFeedWsClose,
+  onError: OrderFeedWsError,
+  onMessage: OrderFeedWsNessage,
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

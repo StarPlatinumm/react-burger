@@ -5,7 +5,7 @@ export type TState = {
   form: TAuthRequest
 };
 
-const initialState: TState = {
+export const initialState: TState = {
   form: {
     email: '',
     password: ''

@@ -6,7 +6,7 @@ export type TState = {
   }
 };
 
-const initialState: TState = {
+export const initialState: TState = {
   form: {
     email: ''
   }

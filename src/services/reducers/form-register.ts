@@ -5,7 +5,7 @@ export type TState = {
   form: TRegistrRequest
 };
 
-const initialState: TState = {
+export const initialState: TState = {
   form: {
     name: '',
     email: '',

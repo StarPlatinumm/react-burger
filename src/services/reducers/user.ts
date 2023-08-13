@@ -21,7 +21,7 @@ import {
     password: string,
   };
   
-  const userInitialState: TUserState = {
+  export const userInitialState: TUserState = {
     isLoading: false,
     failed: false,
     isAuthChecked: false,
