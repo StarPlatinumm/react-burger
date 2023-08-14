@@ -38,7 +38,7 @@ function Modal(props: TProps) {
             <div className={`${modalStyles['modal-header-title']} text text_type_main-large`}>
               {header}
             </div>
-            <button  className={`${modalStyles['modal-header-close-button']}`}>
+            <button data-test='closeModalButton' className={`${modalStyles['modal-header-close-button']}`}>
               { onClose && <CloseIcon type='primary' onClick={onClose}/>}
             </button>
           </div>

@@ -1,6 +1,6 @@
 import { TAuthRequest, TAuthResponse, TForgotPasswordRequest, TForgotPasswordResponse, TIngredientsResponse, TLogoutResponse, TOrderResponse, TOrdersResponseFromAPI, TRefreshTokenResponse, TRegistrRequest, TRegistrResponse, TResetPasswordRequest, TResetPasswordResponse, TUpdateUserRequest, TUpdateUserResponse } from "./types";
 
-const BURGER_API_URL = 'https://norma.nomoreparties.space/api'
+export const BURGER_API_URL = 'https://norma.nomoreparties.space/api'
 
 type TOptions = {
   method?: string,

@@ -66,7 +66,7 @@ function BurgerConstructor() {
 
   return (
     <>
-      <div ref={dropTarget} className={`${burgerConstructorStyles['burger-constructor']} pb-5 pt-25`}> {/* wrapper */}
+      <div ref={dropTarget} className={`${burgerConstructorStyles['burger-constructor']} pb-5 pt-25`} data-test='constructor'> {/* wrapper */}
         {
           !bun && !ingredients.length &&
           <div className={`${burgerConstructorStyles['burger-constructor-is-empty']}`}>
@@ -74,7 +74,7 @@ function BurgerConstructor() {
           </div>
         }
         <div className={`${burgerConstructorStyles['burger-constructor-list']}`}>  {/* constructor */}
-          <div>
+          <div data-test='top_bun'>
             {
               bun &&
               <DragConstructorElement
@@ -103,7 +103,7 @@ function BurgerConstructor() {
               ))
             }
           </div>
-          <div>
+          <div data-test='bottom_bun'>
             {
               bun &&
               <DragConstructorElement
