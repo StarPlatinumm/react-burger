@@ -41,7 +41,7 @@ function RegisterPage() {
     () => {
       dispatch({ type: CLOSE_ERROR });
     },
-    []
+    [dispatch]
   );
 
   return (

@@ -18,7 +18,7 @@ export default function OrdersFeedListPage() {
     return () => {
       dispatch(disconnectFeed());
     };
-  }, []);
+  }, [dispatch]);
 
   const getReversedOrders = (): TOrdersResponse => {
     const orders = ordersData!.orders;

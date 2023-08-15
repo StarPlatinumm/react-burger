@@ -54,7 +54,7 @@ function ProfilePage() {
         password: '',
       })
     },
-    []
+    [email, name]
   );
 
   const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {

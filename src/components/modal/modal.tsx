@@ -28,7 +28,7 @@ function Modal(props: TProps) {
     return () => {
       document.removeEventListener("keydown", handleCloseOnEsc, false);
     };
-  }, []);
+  }, [onClose]);
 
   return ReactDOM.createPortal(
     (

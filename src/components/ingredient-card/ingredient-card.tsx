@@ -25,7 +25,7 @@ function IngredientCard(props: TProps) {
     } else {
       return ingredients.filter((item: TIngredient) => item._id === props.ingredient._id).length;
     }
-  }, [bun, ingredients]);
+  }, [bun?._id, ingredients, props.ingredient._id, props.ingredient.type]);
 
   return (
     <Link

@@ -32,7 +32,7 @@ export default function OrderCardDetailsPage(props: TProps) {
       })
       
     }
-  }, [ordersData, ingredients]);
+  }, [ordersData, ingredients, number]);
 
   return (
     <>

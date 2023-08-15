@@ -40,7 +40,7 @@ function LoginPage() {
     () => {
       dispatch({ type: CLOSE_ERROR });
     },
-    []
+    [dispatch]
   );
 
   return (
