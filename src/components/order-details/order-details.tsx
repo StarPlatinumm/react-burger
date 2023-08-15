@@ -1,6 +1,5 @@
 import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import orderDetailsStyles from './order-details.module.css';
-import PropTypes from 'prop-types';
 
 type TProps = {
   orderDetails: {
@@ -32,13 +31,6 @@ function OrderDetails(props: TProps) {
     }
     </>
   );
-}
-
-OrderDetails.propTypes = {
-  orderDetails: PropTypes.shape({
-    number: PropTypes.number.isRequired
-  }),
-  failed: PropTypes.bool.isRequired
 }
 
 export default OrderDetails;
