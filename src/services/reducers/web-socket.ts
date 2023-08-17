@@ -8,13 +8,13 @@ export enum WebsocketStatus {
   OFFLINE = 'OFFLINE'
 }
 
-export type LiveTableStore = {
+export type TStore = {
   status: WebsocketStatus,
   connectionError: string,
   ordersData: TOrdersResponse | null
 }
 
-const initialState: LiveTableStore = {
+export const initialState: TStore = {
   status: WebsocketStatus.OFFLINE,
   connectionError: '',
   ordersData: null

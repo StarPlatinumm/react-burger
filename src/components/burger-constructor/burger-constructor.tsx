@@ -11,7 +11,6 @@ import { useDrop } from "react-dnd";
 import { ADD_INGREDIENT, MOVE_INGREDIENT, CLEAR_INGREDIENTS } from '../../services/actions/burger-constructor';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../spinner/spinner';
-import { AnyAction } from 'redux';
 import { TIngredient } from '../../utils/types';
 
 function BurgerConstructor() {
@@ -27,7 +26,7 @@ function BurgerConstructor() {
     if (name === '') {
       navigate('/login');
     } else {
-      dispatch(getOrderDetails([bun?._id ?? '', bun?._id ?? '', ...ingredients.map((item: TIngredient) => item._id)]) as unknown as AnyAction);
+      dispatch(getOrderDetails([bun?._id ?? '', bun?._id ?? '', ...ingredients.map((item: TIngredient) => item._id)]));
       dispatch({ type: CLEAR_INGREDIENTS});
     }
   };
@@ -66,7 +65,7 @@ function BurgerConstructor() {
 
   return (
     <>
-      <div ref={dropTarget} className={`${burgerConstructorStyles['burger-constructor']} pb-5 pt-25`}> {/* wrapper */}
+      <div ref={dropTarget} className={`${burgerConstructorStyles['burger-constructor']} pb-5 pt-25`} data-test='constructor'> {/* wrapper */}
         {
           !bun && !ingredients.length &&
           <div className={`${burgerConstructorStyles['burger-constructor-is-empty']}`}>
@@ -74,7 +73,7 @@ function BurgerConstructor() {
           </div>
         }
         <div className={`${burgerConstructorStyles['burger-constructor-list']}`}>  {/* constructor */}
-          <div>
+          <div data-test='top_bun'>
             {
               bun &&
               <DragConstructorElement
@@ -103,7 +102,7 @@ function BurgerConstructor() {
               ))
             }
           </div>
-          <div>
+          <div data-test='bottom_bun'>
             {
               bun &&
               <DragConstructorElement

@@ -9,7 +9,6 @@ import FormButton from '../../components/form/button';
 import Footer from '../../components/form/footer';
 import { registerUser, CLOSE_ERROR } from '../../services/actions/user';
 import Modal from '../../components/modal/modal';
-import { AnyAction } from 'redux';
 
 
 function RegisterPage() {
@@ -28,7 +27,7 @@ function RegisterPage() {
       name: name,
       email: email,
       password: password
-    }) as unknown as AnyAction)
+    }))
   };
 
   const handleCloseModal = () => {
@@ -41,7 +40,7 @@ function RegisterPage() {
     () => {
       dispatch({ type: CLOSE_ERROR });
     },
-    []
+    [dispatch]
   );
 
   return (

@@ -28,7 +28,7 @@ export default function OrderCardDetails({ order, isModal }: TProps) {
             : value);
       }
       return [...acc, { ...item, quantity: 1 }];
-    }, []), [order.ingredients]
+    }, []), [order.fixedIngredients]
   );
 
   return (

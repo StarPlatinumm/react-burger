@@ -7,7 +7,6 @@ import Form from '../../components/form';
 import FormButton from '../../components/form/button';
 import { logoutUser } from '../../services/actions/user';
 import { updateUserData } from '../../services/actions/user';
-import { AnyAction } from 'redux';
 import OrdersFeedListPage from '../orders-feed-list/orders-feed-list';
 
 
@@ -27,13 +26,13 @@ function ProfilePage() {
   const location = useLocation();
 
   const onLogoutHandler = () => {
-    logoutUser();
+    dispatch(logoutUser());
     navigate('/login');
   }
 
   const onSubmitHandler = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(updateUserData(formData) as unknown as AnyAction);
+    dispatch(updateUserData(formData));
     setIsDataChanged(false);
   }
 
@@ -54,7 +53,7 @@ function ProfilePage() {
         password: '',
       })
     },
-    []
+    [email, name]
   );
 
   const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {

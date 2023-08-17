@@ -26,7 +26,7 @@ export default function OrdersFeed() {
     return () => {
       dispatch(disconnectFeed());
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={`${ordersFeedStyles['wrapper']}`}>

@@ -160,7 +160,7 @@ export type TOrder = {
   name: string,
   number: number,
   createdAt: string,
-  updatedAt: string
+  updatedAt: string,
   total?: number
 }
 

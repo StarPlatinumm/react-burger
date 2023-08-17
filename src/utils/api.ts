@@ -1,6 +1,6 @@
 import { TAuthRequest, TAuthResponse, TForgotPasswordRequest, TForgotPasswordResponse, TIngredientsResponse, TLogoutResponse, TOrderResponse, TOrdersResponseFromAPI, TRefreshTokenResponse, TRegistrRequest, TRegistrResponse, TResetPasswordRequest, TResetPasswordResponse, TUpdateUserRequest, TUpdateUserResponse } from "./types";
 
-const BURGER_API_URL = 'https://norma.nomoreparties.space/api'
+export const BURGER_API_URL = 'https://norma.nomoreparties.space/api'
 
 type TOptions = {
   method?: string,
@@ -12,7 +12,7 @@ type TOptions = {
 }
 
 const checkResponse = <T>(res: Response): Promise<T> => {
-  return res.ok ? res.json() : res.json().catch((err) => Promise.reject(err));
+  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
 export const refreshToken = (): Promise<TRefreshTokenResponse> => {
@@ -32,6 +32,7 @@ export const fetchWithRefresh = async <T>(url: string, options: TOptions): Promi
     const res = await fetch(url, options);
     return await checkResponse(res);
   } catch (err) {
+    console.log(err);
     if (err instanceof Error && err.message === "jwt expired") {
       const refreshData = await refreshToken();
       if (!refreshData.success) {
@@ -64,6 +65,7 @@ export const loginUserFetch = (data: TAuthRequest) => {
 };
 
 export const logoutUserFetch = () => {
+  console.log('data');
   return fetch(`${BURGER_API_URL}/auth/logout`, {
     method: 'POST',
     headers: {

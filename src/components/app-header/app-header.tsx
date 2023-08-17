@@ -1,8 +1,10 @@
 import { ListIcon, BurgerIcon, Logo, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import appHeaderStyles from './app-header.module.css';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from '../..';
 
 function AppHeader() {
+  const { name } = useSelector((state) => state.userData);
   return (
     <header className={`${appHeaderStyles['header']} text text_type_main-default pt-3 pb-3`}>
       <nav>
@@ -57,7 +59,7 @@ function AppHeader() {
           >
             <li className={`${appHeaderStyles['menu-item']} p-5 text`} role='button'>
               <ProfileIcon type="secondary" />
-              <span className='ml-2'>Личный кабинет</span>
+              <span className='ml-2'>{name ?? 'Личный кабинет'}</span>
             </li>
           </NavLink>
 

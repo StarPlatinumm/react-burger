@@ -7,7 +7,7 @@ import { compose, createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { rootReducer } from './services/reducers';
 import thunk from 'redux-thunk';
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import { RootState, AppDispatch } from './utils/types';
 import {
   TypedUseSelectorHook,
@@ -16,13 +16,13 @@ import {
 } from "react-redux";
 import { socketMiddleware } from './services/middleware/socket-middleware';
 import { 
-  connect as LiveTableWsConnect, 
-  disconnect as LiveTableWsDisconnect,
-  wsConnecting as LiveTableWsConnecting,
-  wsOpen as LiveTableWsOpen,
-  wsClose as LiveTableWsClose,
-  wsMessage as LiveTableWsNessage,
-  wsError as LiveTableWsError 
+  connect as OrderFeedWsConnect, 
+  disconnect as OrderFeedWsDisconnect,
+  wsConnecting as OrderFeedWsConnecting,
+  wsOpen as OrderFeedWsOpen,
+  wsClose as OrderFeedWsClose,
+  wsMessage as OrderFeedWsNessage,
+  wsError as OrderFeedWsError 
 } from './services/actions/web-socket';
 
 declare global {
@@ -32,13 +32,13 @@ declare global {
 }
 
 const wsActions = {
-  wsConnect: LiveTableWsConnect,
-  wsDisconnect: LiveTableWsDisconnect,
-  wsConnecting: LiveTableWsConnecting,
-  onOpen: LiveTableWsOpen,
-  onClose: LiveTableWsClose,
-  onError: LiveTableWsError,
-  onMessage: LiveTableWsNessage,
+  wsConnect: OrderFeedWsConnect,
+  wsDisconnect: OrderFeedWsDisconnect,
+  wsConnecting: OrderFeedWsConnecting,
+  onOpen: OrderFeedWsOpen,
+  onClose: OrderFeedWsClose,
+  onError: OrderFeedWsError,
+  onMessage: OrderFeedWsNessage,
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -56,11 +56,11 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <Provider store={store}>
         <App />
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );
 

@@ -35,7 +35,7 @@ function BurgerIngredients({ ingredients }: TProps) {
 
   return (
     <>
-      <div className={`${burgerIngredientsStyles['burger-ingredients']} pb-5`}>
+      <div className={`${burgerIngredientsStyles['burger-ingredients']} pb-5`} data-test='ingredients'>
         <div className={`pt-10 pb-5 text text_type_main-large`}>Соберите бургер</div>
         <div ref={tabsRef} className={`${burgerIngredientsStyles['burger-ingredients-filter']}`}>
           <Tab active={currentTab === 'buns'} value={'bun'} onClick={() => null}>Булки</Tab>

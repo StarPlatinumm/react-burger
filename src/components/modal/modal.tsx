@@ -2,7 +2,6 @@ import ReactDOM from 'react-dom';
 import React, { ReactNode, useEffect } from 'react';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import modalStyles from './modal.module.css';
-import PropTypes from 'prop-types';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 
 type TProps = {
@@ -28,7 +27,7 @@ function Modal(props: TProps) {
     return () => {
       document.removeEventListener("keydown", handleCloseOnEsc, false);
     };
-  }, []);
+  }, [onClose]);
 
   return ReactDOM.createPortal(
     (
@@ -38,7 +37,7 @@ function Modal(props: TProps) {
             <div className={`${modalStyles['modal-header-title']} text text_type_main-large`}>
               {header}
             </div>
-            <button  className={`${modalStyles['modal-header-close-button']}`}>
+            <button data-test='closeModalButton' className={`${modalStyles['modal-header-close-button']}`}>
               { onClose && <CloseIcon type='primary' onClick={onClose}/>}
             </button>
           </div>
@@ -51,12 +50,6 @@ function Modal(props: TProps) {
     ), 
     modalRoot
   );
-}
-
-Modal.propTypes = {
-  header: PropTypes.string.isRequired,
-  onClose: PropTypes.func,
-  children: PropTypes.node,
 }
 
 export default Modal;

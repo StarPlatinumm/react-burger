@@ -24,7 +24,7 @@ export interface IGetLoginUserAction {
 
 export interface IGetLogoutUserAction {
   readonly type: typeof LOGOUT_USER;
-  readonly data: TLogoutResponse;
+  readonly data?: TLogoutResponse;
 }
 
 export interface IGetRegisterUserAction {
@@ -110,14 +110,15 @@ export function logoutUser(): AppThunkAction {
     dispatch({
       type: USER_REQUEST_LOADING
     });
+    dispatch({
+      type: LOGOUT_USER
+    });
 
     logoutUserFetch()
       .then(data => {
         if (data && data.success) {
-          dispatch({
-            type: LOGOUT_USER,
-            data: data
-          });
+          localStorage.removeItem("refreshToken");
+          localStorage.removeItem("accessToken");
         }
       })
       .catch(data => {
