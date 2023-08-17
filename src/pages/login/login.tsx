@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from '../..';
 import { useEffect } from 'react';
-import { AnyAction } from 'redux';
 import { Link } from 'react-router-dom';
 import { EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import { setLoginFormValue } from '../../services/actions/form-login';
@@ -27,7 +26,7 @@ function LoginPage() {
     dispatch(loginUser({
       email: email,
       password: password
-    }) as unknown as AnyAction);
+    }));
   };
 
   const handleCloseModal = () => {

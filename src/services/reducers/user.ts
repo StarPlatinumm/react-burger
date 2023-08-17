@@ -16,7 +16,7 @@ import {
     failed: boolean,
     isAuthChecked: boolean,
     message: string,
-    name: string,
+    name: string | null,
     email: string,
     password: string,
   };
@@ -26,7 +26,7 @@ import {
     failed: false,
     isAuthChecked: false,
     message: '',
-    name: '',
+    name: null,
     email: '',
     password: '',
   };
