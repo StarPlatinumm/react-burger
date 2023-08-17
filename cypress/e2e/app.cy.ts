@@ -3,7 +3,7 @@ import { BURGER_API_URL } from "../../src/utils/api"
 describe('Application', () => {
   beforeEach(() => {
     cy.intercept('GET', `${BURGER_API_URL}/ingredients`, { fixture: 'ingredients'});
-    cy.visit('http://localhost:3000/');
+    cy.visit('');
     cy.get("[data-test=ingredients]").contains('Просто булка').as('bun');
     cy.get("[data-test=ingredients]").contains('Просто котлетка').as('main');
     cy.get("[data-test=constructor]").as('constructor');
